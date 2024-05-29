@@ -6,172 +6,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#70B9BE"
-    tools:context=".WelcomeActivity">
-
-
-    <ImageView
-        android:id="@+id/iv_tomato"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_tomato"
-        tools:layout_editor_absoluteX="56dp"
-        tools:layout_editor_absoluteY="97dp" />
-
-    <ImageView
-        android:id="@+id/iv_chicken"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_chicken"
-        tools:layout_editor_absoluteX="230dp"
-        tools:layout_editor_absoluteY="28dp" />
-
-    <ImageView
-        android:id="@+id/iv_egg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_egg"
-        tools:layout_editor_absoluteX="52dp"
-        tools:layout_editor_absoluteY="229dp" />
-
-    <ImageView
-        android:id="@+id/iv_carrot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_carrot"
-        tools:layout_editor_absoluteX="52dp"
-        tools:layout_editor_absoluteY="408dp" />
-
-    <ImageView
-        android:id="@+id/iv_meat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_meat"
-        tools:layout_editor_absoluteX="271dp"
-        tools:layout_editor_absoluteY="389dp" />
-
-    <ImageView
-        android:id="@+id/iv_cheese"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_cheese"
-        tools:layout_editor_absoluteX="249dp"
-        tools:layout_editor_absoluteY="162dp" />
-
-    <ImageView
-        android:id="@+id/iv_circle1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_ellipse"
-        tools:layout_editor_absoluteX="192dp"
-        tools:layout_editor_absoluteY="212dp" />
-
-    <ImageView
-        android:id="@+id/iv_circle2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_ellipse"
-        tools:layout_editor_absoluteX="164dp"
-        tools:layout_editor_absoluteY="297dp" />
-
-    <ImageView
-        android:id="@+id/iv_circle3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_ellipse"
-        tools:layout_editor_absoluteX="357dp"
-        tools:layout_editor_absoluteY="337dp" />
-
-    <ImageView
-        android:id="@+id/iv_circle4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_ellipse"
-        tools:layout_editor_absoluteX="56dp"
-        tools:layout_editor_absoluteY="345dp" />
-
-    <ImageView
-        android:id="@+id/iv_circle5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_ellipse"
-        tools:layout_editor_absoluteX="164dp"
-        tools:layout_editor_absoluteY="452dp" />
-
-    <ImageView
-        android:id="@+id/ic_leaf1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_leaf"
-        tools:layout_editor_absoluteX="136dp"
-        tools:layout_editor_absoluteY="330dp" />
-
-    <ImageView
-        android:id="@+id/ic_leaf2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_leaf"
-        tools:layout_editor_absoluteX="261dp"
-        tools:layout_editor_absoluteY="483dp" />
-
-    <ImageView
-        android:id="@+id/ic_leaf3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_leaf"
-        tools:layout_editor_absoluteX="249dp"
-        tools:layout_editor_absoluteY="345dp" />
-
-
-    <ImageView
-        android:id="@+id/ic_leaf4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_leaf"
-        tools:layout_editor_absoluteX="189dp"
-        tools:layout_editor_absoluteY="322dp" />
-
-    <ImageView
-        android:id="@+id/ic_leaf5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_leaf"
-        tools:layout_editor_absoluteX="64dp"
-        tools:layout_editor_absoluteY="197dp" />
-
-    <ImageView
-        android:id="@+id/ic_leaf6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_leaf"
-        tools:layout_editor_absoluteX="200dp"
-        tools:layout_editor_absoluteY="162dp" />
+    tools:context=".ui.welcome.WelcomeActivity">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="18dp"
-        android:text="Let’s make your own food"
+        android:layout_marginHorizontal="20dp"
+        android:text="@string/let_s_make_your_own_food"
         android:textColor="@color/white"
         android:textFontWeight="@integer/material_motion_duration_medium_1"
-        android:textSize="28sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_newacc"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toTopOf="@+id/button_toLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
-
-    <TextView
-        android:id="@+id/tv_newacc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginBottom="150dp"
-        android:text="Create New Account"
-        android:textColor="@color/white"
-        android:textFontWeight="@integer/material_motion_duration_medium_1"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/button_toLogin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button_toLogin"
@@ -180,20 +29,18 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="15dp"
         android:text="@string/login"
-        android:background="@drawable/rounded_buttton"
-        android:backgroundTint="@color/white"
-        android:textColor="@color/md_theme_primary"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:background="@drawable/rounded_button"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_newacc" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
     <Button
         android:id="@+id/button_toRegister"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="20dp"
         android:background="@android:color/transparent"
         android:text="@string/create_a_new_account"
         android:textColor="@color/white"

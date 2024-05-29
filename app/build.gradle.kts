@@ -48,4 +48,15 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // circle image
+    implementation(libs.circleImageView)
+    implementation(libs.animatedBottomBar)
+
+    //camerax
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.camera.lifecycle)
+    implementation(libs.camera.view)
+
+    implementation("com.google.android.material:material:1.3.0-alpha03")
 }

@@ -1,11 +1,8 @@
-package com.capstone.mageiras
+package com.capstone.mageiras.ui.welcome
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.capstone.mageiras.databinding.ActivityWelcomeBinding
 import com.capstone.mageiras.ui.login.LoginActivity
 import com.capstone.mageiras.ui.register.RegisterActivity

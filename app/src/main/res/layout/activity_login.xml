@@ -91,13 +91,13 @@
         android:id="@+id/button_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
         android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/rounded_button"
         android:text="@string/login"
         app:layout_constraintBottom_toTopOf="@+id/toRegister"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/rounded_buttton"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/toRegister"
@@ -116,8 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="@string/register"
-            android:textColor="@color/md_theme_primary"/>
+            android:text="@string/register"/>
 
     </LinearLayout>
 

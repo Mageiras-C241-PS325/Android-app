@@ -9,8 +9,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import com.capstone.mageiras.R
 import com.capstone.mageiras.databinding.ActivityRegisterBinding
+import com.capstone.mageiras.ui.AuthViewModelFactory
 import com.capstone.mageiras.ui.main.MainActivity
 import com.capstone.mageiras.ui.welcome.WelcomeActivity
 import com.google.firebase.Firebase
@@ -31,22 +33,17 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val factory: AuthViewModelFactory = AuthViewModelFactory.getInstance()
+        val viewModel: RegisterViewModel = ViewModelProvider(this,factory)[RegisterViewModel::class.java]
+
         binding.buttonRegister.setOnClickListener {
-            createAccount(binding.edRegisterEmail.text.toString(),binding.edRegisterPassword.text.toString())
-        }
-    }
-
-    private fun createAccount(email: String, password: String) {
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
+            viewModel.createAccount(binding.edRegisterEmail.text.toString(),binding.edRegisterPassword.text.toString()).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-
                     val intent = Intent(this, WelcomeActivity::class.java)
                     intent.flags =
                         Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
                 } else {
-                    // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
                     Toast.makeText(
                         baseContext,
@@ -55,5 +52,6 @@ class RegisterActivity : AppCompatActivity() {
                     ).show()
                 }
             }
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.capstone.mageiras.ui.login
 
+import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
@@ -9,9 +10,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import com.capstone.mageiras.R
 import com.capstone.mageiras.databinding.ActivityLoginBinding
+import com.capstone.mageiras.ui.AuthViewModelFactory
 import com.capstone.mageiras.ui.main.MainActivity
+import com.capstone.mageiras.ui.register.RegisterViewModel
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -31,9 +35,28 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         super.onCreate(savedInstanceState)
 
+        val factory: AuthViewModelFactory = AuthViewModelFactory.getInstance()
+        val viewModel: LoginViewModel = ViewModelProvider(this,factory)[LoginViewModel::class.java]
+
 
         binding.buttonLogin.setOnClickListener {
-            signIn(binding.edLoginEmail.text.toString(), binding.edLoginPassword.text.toString())
+            viewModel.signin(binding.edLoginEmail.text.toString(), binding.edLoginPassword.text.toString()) .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(ContentValues.TAG, "signInWithEmail:success")
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(ContentValues.TAG, "signInWithEmail:failure", task.exception)
+                    Toast.makeText(
+                        baseContext,
+                        "Authentication failed.",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                }
+            }
         }
 
     }

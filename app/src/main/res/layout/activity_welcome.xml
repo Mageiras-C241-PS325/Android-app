@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#70B9BE"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar"
     tools:context=".ui.welcome.WelcomeActivity">
 
     <TextView
@@ -29,7 +30,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="15dp"
         android:text="@string/login"
-        android:background="@drawable/rounded_button"
+        android:background="@drawable/rounded_button_welcome"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -30,4 +30,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="let_s_make_your_own_food">Let’s make your own food</string>
+    <string name="put_in_the_fridge">Put in the Fridge</string>
+    <string name="is_this_really_the_ingredient">Is this really the ingredient?</string>
+    <string name="splashscreen">Splashscreen</string>
 </resources>

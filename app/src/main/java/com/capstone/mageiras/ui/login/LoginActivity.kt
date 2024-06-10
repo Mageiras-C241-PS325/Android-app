@@ -6,16 +6,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
-import com.capstone.mageiras.R
 import com.capstone.mageiras.databinding.ActivityLoginBinding
 import com.capstone.mageiras.ui.AuthViewModelFactory
 import com.capstone.mageiras.ui.main.MainActivity
-import com.capstone.mageiras.ui.register.RegisterViewModel
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -40,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         binding.buttonLogin.setOnClickListener {
-            viewModel.signin(binding.edLoginEmail.text.toString(), binding.edLoginPassword.text.toString()) .addOnCompleteListener(this) { task ->
+            viewModel.signIn(binding.edLoginEmail.text.toString(), binding.edLoginPassword.text.toString()).addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(ContentValues.TAG, "signInWithEmail:success")

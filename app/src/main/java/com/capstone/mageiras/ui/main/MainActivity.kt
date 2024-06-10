@@ -14,6 +14,9 @@ import nl.joery.animatedbottombar.AnimatedBottomBar
 import android.Manifest
 import android.content.Intent
 import com.capstone.mageiras.ui.camerax.CameraXActivity
+import com.capstone.mageiras.ui.welcome.WelcomeActivity
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 class MainActivity : AppCompatActivity() {
 
@@ -52,6 +55,13 @@ class MainActivity : AppCompatActivity() {
         binding.fab.setOnClickListener {
             val intent = Intent(this, CameraXActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.button.setOnClickListener{
+            Firebase.auth.signOut()
+            val intent = Intent(this, WelcomeActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
     }

@@ -33,4 +33,12 @@
     <string name="put_in_the_fridge">Put in the Fridge</string>
     <string name="is_this_really_the_ingredient">Is this really the ingredient?</string>
     <string name="splashscreen">Splashscreen</string>
+    <string name="user_s_profile_picture">User\'s profile picture</string>
+    <string name="settings">Settings</string>
+    <string name="username_placeholder">Username</string>
+    <string name="recommended_recipe">Recommended Recipe</string>
+    <string name="what_is_inside_your_refrigerator">What is inside your Refrigerator?</string>
+    <string name="recipes_name">Recipes name</string>
+    <string name="cooking_time">Cooking Time</string>
+    <string name="recipes_card_picture">Recipes Card Picture</string>
 </resources>

@@ -13,6 +13,8 @@ import com.capstone.mageiras.ui.recipe.RecipeFragment
 import nl.joery.animatedbottombar.AnimatedBottomBar
 import android.Manifest
 import android.content.Intent
+import android.util.Log
+import com.capstone.mageiras.data.dummy.DummyData
 import com.capstone.mageiras.ui.camerax.CameraXActivity
 import com.capstone.mageiras.ui.welcome.WelcomeActivity
 import com.google.firebase.Firebase
@@ -39,9 +41,9 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             val newFragment: Fragment = when (item.itemId) {
-                R.id.item1 -> HomeFragment()
-                R.id.item3 -> RecipeFragment()
-                else -> HomeFragment() // Default ke HomeFragment jika tidak ada yang cocok
+                R.id.menu_fridge -> showHomeFragment()
+                R.id.menu_recipes -> RecipeFragment()
+                else -> showHomeFragment() // Default ke HomeFragment jika tidak ada yang cocok
             }
 
             // Melakukan transaksi Fragment
@@ -57,13 +59,23 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.button.setOnClickListener{
-            Firebase.auth.signOut()
-            val intent = Intent(this, WelcomeActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+//        binding.button.setOnClickListener{
+//            Firebase.auth.signOut()
+//            val intent = Intent(this, WelcomeActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
 
+    }
+
+    private fun showHomeFragment() : Fragment {
+        val homeFragment = HomeFragment()
+        val bundle = Bundle()
+        val dummyData = DummyData()
+        val listRecipes = dummyData.getDummyRecipesData()
+        bundle.putParcelableArrayList("LIST_RECIPES", ArrayList(listRecipes))
+        homeFragment.arguments = bundle
+        return homeFragment
     }
     companion object {
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA

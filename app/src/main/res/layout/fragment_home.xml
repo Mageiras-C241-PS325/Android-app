@@ -21,10 +21,10 @@
 
             <ImageView
                 android:id="@+id/iv_profile_picture"
-                android:layout_width="49dp"
-                android:layout_height="0dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:contentDescription="@string/user_s_profile_picture"
-                android:src="@drawable/baseline_circle_24"
+                android:background="@drawable/baseline_circle_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -33,11 +33,14 @@
                 android:id="@+id/tv_profile_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:ellipsize="end"
-                android:maxWidth="100dp"
+                android:maxWidth="150dp"
                 android:maxLines="1"
                 android:scrollHorizontally="true"
                 android:text="@string/username_placeholder"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/iv_profile_picture"
@@ -53,26 +56,27 @@
             app:layout_constraintEnd_toStartOf="@+id/right_margin"
             app:layout_constraintTop_toTopOf="@+id/top_margin">
 
-            <TextView
-                android:id="@+id/tv_settings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:text="@string/settings"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageButton"
-                app:layout_constraintTop_toTopOf="parent" />
+<!--            <TextView-->
+<!--                android:id="@+id/tv_settings"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                android:text="@string/settings"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textStyle="bold"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/button_settings"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
 
             <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/round_settings_24"
-                android:background="@android:color/transparent"
+                android:id="@+id/button_settings"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/round_settings_24"
+                android:contentDescription="@string/settings"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/settings"/>
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.Guideline
@@ -94,67 +98,62 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="32dp" />
+            app:layout_constraintGuide_begin="16dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/header_bottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="82dp" />
+            app:layout_constraintGuide_begin="100dp" />
 
         <LinearLayout
             android:id="@+id/recommended_recipes_card"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/recommended_recipes_bottom"
             app:layout_constraintEnd_toStartOf="@+id/right_margin"
             app:layout_constraintStart_toStartOf="@+id/left_margin"
-            app:layout_constraintTop_toTopOf="@+id/header_bottom">
+            app:layout_constraintTop_toBottomOf="@+id/header_bottom"
+            android:weightSum="3"
+            >
 
             <TextView
                 android:id="@+id/tv_recommended_recipes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/recommended_recipe"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/carousel_rv_recipes"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
         </LinearLayout>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/recommended_recipes_bottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="250dp" />
 
         <LinearLayout
             android:id="@+id/ingredients_card"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/ingredients_card_bottom"
             app:layout_constraintEnd_toStartOf="@+id/right_margin"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/left_margin"
-            app:layout_constraintTop_toTopOf="@+id/recommended_recipes_bottom">
+            app:layout_constraintTop_toBottomOf="@+id/recommended_recipes_card">
 
             <TextView
                 android:id="@+id/what_inside_refri"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/what_is_inside_your_refrigerator"
-                android:textStyle="bold"/>
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:id="@+id/rv_ingredients"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent" />-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_ingredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <androidx.constraintlayout.widget.Guideline

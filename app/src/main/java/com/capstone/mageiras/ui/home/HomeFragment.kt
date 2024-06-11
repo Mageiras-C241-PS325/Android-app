@@ -1,11 +1,13 @@
 package com.capstone.mageiras.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavType.ParcelableArrayType
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +16,7 @@ import com.capstone.mageiras.R
 import com.capstone.mageiras.data.dummy.DummyData
 import com.capstone.mageiras.databinding.FragmentHomeBinding
 import com.capstone.mageiras.ui.adapter.ListRecipesAdapter
+import com.capstone.mageiras.ui.setting.SettingActivity
 
 //private const val LIST_INGREDIENTS = "param1"
 private const val LIST_RECIPES = "param2"
@@ -46,6 +49,16 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         carouselListRecipes = view.findViewById(R.id.carousel_rv_recipes)
         showRecyclerList()
+        createAction(view)
+
+    }
+
+    private fun createAction(view: View) {
+        val settingButton: ImageButton = view.findViewById(R.id.button_settings)
+        settingButton.setOnClickListener {
+            val intent = Intent(requireContext(), SettingActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun showRecyclerList() {

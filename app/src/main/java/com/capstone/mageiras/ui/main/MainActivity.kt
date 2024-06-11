@@ -14,6 +14,7 @@ import nl.joery.animatedbottombar.AnimatedBottomBar
 import android.Manifest
 import android.content.Intent
 import android.util.Log
+import androidx.appcompat.app.AppCompatDelegate
 import com.capstone.mageiras.data.dummy.DummyData
 import com.capstone.mageiras.ui.camerax.CameraXActivity
 import com.capstone.mageiras.ui.welcome.WelcomeActivity
@@ -38,7 +39,6 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.mainLayout, HomeFragment()).commit()
-
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             val newFragment: Fragment = when (item.itemId) {
                 R.id.menu_fridge -> showHomeFragment()

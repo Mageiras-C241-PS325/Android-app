@@ -41,4 +41,5 @@
     <string name="recipes_name">Recipes name</string>
     <string name="cooking_time">Cooking Time</string>
     <string name="recipes_card_picture">Recipes Card Picture</string>
+    <string name="logout">Logout</string>
 </resources>

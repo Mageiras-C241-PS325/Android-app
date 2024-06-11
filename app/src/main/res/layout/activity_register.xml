@@ -41,8 +41,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_username"
-        app:startIconDrawable="@drawable/baseline_email_24"
-        android:hint="@string/your_username">
+        app:startIconDrawable="@drawable/ic_baseline_person_24"
+        app:hintEnabled="false"
+        >
 
         <com.capstone.mageiras.ui.customview.MyEditText
             android:id="@+id/ed_register_username"
@@ -50,6 +51,8 @@
             android:layout_height="match_parent"
             android:paddingStart="50dp"
             android:background="@drawable/edit_text"
+            android:inputType="textPersonName"
+            android:hint="@string/your_username"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -75,7 +78,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_email"
         app:startIconDrawable="@drawable/baseline_email_24"
-        android:hint="@string/your_email">
+        app:hintEnabled="false"
+        app:errorEnabled="false"
+        >
 
         <com.capstone.mageiras.ui.customview.MyEditText
             android:id="@+id/ed_register_email"
@@ -83,6 +88,8 @@
             android:layout_height="match_parent"
             android:paddingStart="50dp"
             android:background="@drawable/edit_text"
+            android:inputType="textEmailAddress"
+            android:hint="@string/your_email"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -107,8 +114,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_password"
-        app:startIconDrawable="@drawable/baseline_email_24"
-        android:hint="@string/your_password">
+        app:endIconMode="password_toggle"
+        app:errorEnabled="false"
+        app:hintEnabled="false"
+        app:startIconDrawable="@drawable/ic_baseline_lock_24"
+        >
 
         <com.capstone.mageiras.ui.customview.MyEditText
             android:id="@+id/ed_register_password"
@@ -116,6 +126,11 @@
             android:layout_height="match_parent"
             android:paddingStart="50dp"
             android:background="@drawable/edit_text"
+
+            android:inputType="textPassword"
+            android:hint="@string/your_password"
+            tools:ignore="SpeakableTextPresentCheck"
+            app:passwordToggleEnabled="true"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -138,18 +153,26 @@
         android:layout_height="56dp"
         android:layout_marginHorizontal="30dp"
         android:layout_marginBottom="73dp"
-        android:hint="@string/your_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_confirm_password"
-        app:startIconDrawable="@drawable/baseline_email_24">
+        app:endIconMode="password_toggle"
+        app:errorEnabled="false"
+        app:hintEnabled="false"
+        app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
         <com.capstone.mageiras.ui.customview.MyEditText
-            android:id="@+id/ed_login_confirm_password"
+            android:id="@+id/ed_register_confirm_password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingStart="50dp"
-            android:background="@drawable/edit_text"/>
+            android:background="@drawable/edit_text"
+
+            android:inputType="textPassword"
+            android:hint="@string/your_password"
+            tools:ignore="SpeakableTextPresentCheck"
+            app:passwordToggleEnabled="true"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

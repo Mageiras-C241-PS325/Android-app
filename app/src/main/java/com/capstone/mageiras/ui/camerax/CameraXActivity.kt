@@ -3,12 +3,9 @@ package com.capstone.mageiras.ui.camerax
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
@@ -16,22 +13,18 @@ import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.capstone.mageiras.R
 import com.capstone.mageiras.databinding.ActivityCameraXactivityBinding
-import com.capstone.mageiras.ui.main.MainActivity
 import com.capstone.mageiras.ui.result.ResultActivity
 import com.capstone.mageiras.utils.createCustomTempFile
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class CameraXActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCameraXactivityBinding
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
     private var imageCapture: ImageCapture? = null
+
+    private var flashOn = false
 
     private fun allPermissionsGranted() =
         ContextCompat.checkSelfPermission(
@@ -65,8 +58,19 @@ class CameraXActivity : AppCompatActivity() {
         binding.captureButton.setOnClickListener {
             takePhoto()
         }
-    }
 
+        binding.flashButton.setOnClickListener {
+            toggleFlash()
+        }
+
+        binding.switchButton.setOnClickListener {
+            flipCamera()
+        }
+
+        binding.galleryButton.setOnClickListener {
+            pickFromGallery()
+        }
+    }
 
 
     private fun startCamera() {
@@ -127,6 +131,7 @@ class CameraXActivity : AppCompatActivity() {
                     intent.putExtra(EXTRA_CAMERAX_IMAGE, output.savedUri.toString())
                     startActivity(intent)
                 }
+
                 override fun onError(exc: ImageCaptureException) {
                     Toast.makeText(
                         this@CameraXActivity,
@@ -137,6 +142,68 @@ class CameraXActivity : AppCompatActivity() {
                 }
             }
         )
+    }
+
+    private fun toggleFlash() {
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
+
+        cameraProviderFuture.addListener({
+            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
+
+            try {
+
+                val camera = cameraProvider.bindToLifecycle(this, cameraSelector)
+                if (
+                    camera.cameraInfo.hasFlashUnit()
+                ) {
+                    if (flashOn) {
+                        flashOn = false
+                        binding.flashButton.setImageResource(R.drawable.baseline_flash_on_24)
+                        camera.cameraControl.enableTorch(false)
+                    } else {
+                        flashOn = true
+                        binding.flashButton.setImageResource(R.drawable.baseline_flash_off_24)
+                        camera.cameraControl.enableTorch(true)
+                    }
+                } else {
+                    Toast.makeText(
+                        this,
+                        "Flash tidak tersedia",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } catch (exc: Exception) {
+                Log.e(TAG, "cameraFlash: ${exc.message}")
+            }
+        }, ContextCompat.getMainExecutor(this))
+
+
+    }
+
+    fun flipCamera() {
+        cameraSelector = if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
+            CameraSelector.DEFAULT_FRONT_CAMERA
+        } else {
+            CameraSelector.DEFAULT_BACK_CAMERA
+        }
+        stopCamera()
+        startCamera()
+    }
+
+    private fun pickFromGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, CAMERAX_RESULT)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == CAMERAX_RESULT && resultCode == RESULT_OK) {
+            val selectedImageUri = data?.data
+            val intent = Intent(this, ResultActivity::class.java)
+            intent.putExtra(EXTRA_CAMERAX_IMAGE, selectedImageUri.toString())
+            startActivity(intent)
+        }
     }
 
     companion object {

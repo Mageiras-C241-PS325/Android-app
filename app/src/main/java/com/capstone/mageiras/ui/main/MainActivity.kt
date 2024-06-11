@@ -59,13 +59,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-//        binding.button.setOnClickListener{
-//            Firebase.auth.signOut()
-//            val intent = Intent(this, WelcomeActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//        }
-
     }
 
     private fun showHomeFragment() : Fragment {

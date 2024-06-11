@@ -42,4 +42,6 @@
     <string name="cooking_time">Cooking Time</string>
     <string name="recipes_card_picture">Recipes Card Picture</string>
     <string name="logout">Logout</string>
+    <string name="ingredient_name">Ingredient Name</string>
+    <string name="amount">amount</string>
 </resources>

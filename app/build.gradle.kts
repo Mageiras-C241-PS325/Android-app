@@ -67,7 +67,11 @@ dependencies {
     implementation(libs.roomRuntime)
     ksp(libs.roomCompiler)
 
-    implementation("androidx.core:core-splashscreen:1.0.0-beta02")
+    //tensorflow
+    implementation(libs.tensorflowLiteTaskVision)
+    implementation(libs.tensorflowLiteMetadata)
+    implementation(libs.tensorflowLiteGpu)
+    implementation(libs.tensorflowLite)
 
     implementation("com.google.android.material:material:1.3.0-alpha03")
 }

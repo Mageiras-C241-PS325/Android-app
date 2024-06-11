@@ -17,14 +17,7 @@ import com.capstone.mageiras.ui.camerax.CameraXActivity
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var bottomBars: Array<AnimatedBottomBar>
     private lateinit var binding: ActivityMainBinding
-
-    private fun allPermissionsGranted() =
-        ContextCompat.checkSelfPermission(
-            this,
-            REQUIRED_PERMISSION
-        ) == PackageManager.PERMISSION_GRANTED
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.mainLayout, HomeFragment()).commit()
 
-        binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
             val newFragment: Fragment = when (item.itemId) {
                 R.id.item1 -> HomeFragment()
                 R.id.item3 -> RecipeFragment()
@@ -54,8 +47,5 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-    }
-    companion object {
-        private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
     }
 }

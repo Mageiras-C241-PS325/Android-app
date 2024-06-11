@@ -3,7 +3,6 @@ package com.capstone.mageiras.ui.onboarding
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.capstone.mageiras.ui.welcome.WelcomeActivity
 import com.capstone.mageiras.databinding.ActivityOnBoardingBinding
 

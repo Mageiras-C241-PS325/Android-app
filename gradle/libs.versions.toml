@@ -16,6 +16,10 @@ cameraxVersion = "1.2.3"
 room = "2.5.2"
 googleGmsGoogleServices = "4.4.2"
 firebaseAuth = "23.0.0"
+tensorflowLiteTaskVision = "0.4.4"
+tensorflowLiteMetadata = "0.1.0"
+tensorflowLiteGpu = "2.9.0"
+tensorflowLite = "2.9.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -35,6 +39,10 @@ roomKtx = { module = "androidx.room:room-ktx", version.ref = "room" }
 roomRuntime = { module = "androidx.room:room-runtime", version.ref = "room" }
 roomCompiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
+tensorflowLiteTaskVision = { module = "org.tensorflow:tensorflow-lite-task-vision", version.ref = "tensorflowLiteTaskVision" }
+tensorflowLiteMetadata = { module = "org.tensorflow:tensorflow-lite-metadata", version.ref = "tensorflowLiteMetadata" }
+tensorflowLiteGpu = { module = "org.tensorflow:tensorflow-lite-gpu", version.ref = "tensorflowLiteGpu" }
+tensorflowLite = { module = "org.tensorflow:tensorflow-lite", version.ref = "tensorflowLite" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

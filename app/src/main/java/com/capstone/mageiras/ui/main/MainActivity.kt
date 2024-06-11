@@ -23,14 +23,7 @@ import com.google.firebase.auth.auth
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var bottomBars: Array<AnimatedBottomBar>
     private lateinit var binding: ActivityMainBinding
-
-    private fun allPermissionsGranted() =
-        ContextCompat.checkSelfPermission(
-            this,
-            REQUIRED_PERMISSION
-        ) == PackageManager.PERMISSION_GRANTED
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +32,8 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.mainLayout, HomeFragment()).commit()
-        binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
             val newFragment: Fragment = when (item.itemId) {
                 R.id.menu_fridge -> showHomeFragment()
                 R.id.menu_recipes -> RecipeFragment()
@@ -60,7 +54,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
     private fun showHomeFragment() : Fragment {
         val homeFragment = HomeFragment()
         val bundle = Bundle()

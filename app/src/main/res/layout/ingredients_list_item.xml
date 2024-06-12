@@ -13,7 +13,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/iv_ingredients_picture"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:padding="15dp"
@@ -23,20 +23,22 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/tv_ingredients_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Keju"
-                android:textStyle="bold"
                 android:layout_marginStart="15dp"
+                android:text="@string/ingredient_name"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintStart_toEndOf="@+id/iv_ingredients_picture"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/tv_ingredients_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="500gr"
                 android:layout_marginEnd="25dp"
+                android:text="@string/amount"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

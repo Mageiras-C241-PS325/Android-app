@@ -1,59 +1,120 @@
 package com.capstone.mageiras.ui.home
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.capstone.mageiras.R
+import com.capstone.mageiras.data.dummy.DummyData
+import com.capstone.mageiras.ui.adapter.ListIngredientsAdapter
+import com.capstone.mageiras.ui.adapter.ListRecipesAdapter
+import com.capstone.mageiras.ui.setting.SettingActivity
+import com.capstone.mageiras.ui.welcome.WelcomeActivity
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+//private const val LIST_INGREDIENTS = "param1"
+private const val LIST_RECIPES = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    //    private var listIngredients: String? = null
+    private var recipesList: ArrayList<DummyData.Recipes>? = null
+    private lateinit var recommendedRecipesRV: RecyclerView
+    private lateinit var refrigeratorIngredientsRV: RecyclerView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Inflate the layout for this fragment
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+//            listIngredients = it.getString(LIST_INGREDIENTS)
+            recipesList = it.getParcelableArrayList<DummyData.Recipes>(LIST_RECIPES)
         }
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        recommendedRecipesRV = view.findViewById(R.id.carousel_rv_recipes)
+        refrigeratorIngredientsRV = view.findViewById(R.id.rv_ingredients)
+        showRecyclerList()
+        createAction(view)
+        showAuth(view)
+    }
+
+    private fun createAction(view: View) {
+        val settingButton: ImageButton = view.findViewById(R.id.button_settings)
+        settingButton.setOnClickListener {
+            val intent = Intent(requireContext(), SettingActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun showAuth(view: View) {
+        val user = Firebase.auth.currentUser
+        if (user != null) {
+            // User is signed in
+            Log.d("User", "User is signed in")
+            Log.d("user", user.toString())
+            Log.d("user", user.displayName.toString())
+            Log.d("usertest", user.email.toString())
+            val name = user.email
+            val tvUsername: TextView = view.findViewById(R.id.tv_profile_username)
+            tvUsername.text = name
+        } else {
+            // No user is signed in
+            Log.d("User", "No user is signed in")
+            val intent = Intent(requireContext(), WelcomeActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun showRecyclerList() {
+        recommendedRecipesRV.setLayoutManager(
+            LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+        )
+        val dummyData = DummyData()
+        Log.d("List recipes", dummyData.getDummyRecipesData().toString())
+        val listRecipesAdapter = ListRecipesAdapter(dummyData.getDummyRecipesData())
+        recommendedRecipesRV.adapter = listRecipesAdapter
+
+        refrigeratorIngredientsRV.setLayoutManager(
+            LinearLayoutManager(
+                requireContext()
+            )
+        )
+        val listIngredientsAdapter = ListIngredientsAdapter(dummyData.getDummyIngredientsData())
+        refrigeratorIngredientsRV.adapter = listIngredientsAdapter
+    }
+
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(ingredientsList: List<DummyData.Ingredients>) =
             HomeFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+//                    putParcelableArrayList(LIST_INGREDIENTS, ArrayList(ingredientsList))
+                    putParcelableArrayList(
+                        LIST_RECIPES,
+                        ingredientsList as ArrayList<DummyData.Recipes>
+                    )
                 }
             }
     }

@@ -3,6 +3,7 @@
     <style name="Base.Theme.Mageiras" parent="Theme.Material3.Light.NoActionBar">
 
         <item name="android:textViewStyle">@style/AppTextStyle</item>
+
         <item name="materialButtonStyle">@style/AppMaterialButtonStyle</item>
 
         <item name="colorPrimary">@color/md_theme_primary</item>

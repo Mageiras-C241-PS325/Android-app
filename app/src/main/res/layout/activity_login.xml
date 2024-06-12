@@ -42,7 +42,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_email"
         app:startIconDrawable="@drawable/baseline_email_24"
-        android:hint="@string/your_email">
+        app:hintEnabled="false">
 
         <com.capstone.mageiras.ui.customview.MyEditText
             android:id="@+id/ed_login_email"
@@ -50,6 +50,8 @@
             android:layout_height="match_parent"
             android:paddingStart="50dp"
             android:background="@drawable/edit_text"
+            android:inputType="textEmailAddress"
+            android:hint="@string/your_email"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,8 +76,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_password"
-        app:startIconDrawable="@drawable/baseline_email_24"
-        android:hint="@string/your_password">
+        app:startIconDrawable="@drawable/ic_baseline_lock_24"
+        app:endIconMode="password_toggle"
+        app:errorEnabled="true"
+        app:hintEnabled="false"
+        >
 
         <com.capstone.mageiras.ui.customview.MyEditText
             android:id="@+id/ed_login_password"
@@ -83,7 +88,11 @@
             android:layout_height="match_parent"
             android:paddingStart="50dp"
             android:background="@drawable/edit_text"
+            android:inputType="textPassword"
+
+            tools:ignore="SpeakableTextPresentCheck"
             app:passwordToggleEnabled="true"
+            android:hint="@string/your_password"
             />
     </com.google.android.material.textfield.TextInputLayout>
 

@@ -16,7 +16,9 @@
         app:fabCradleMargin="20dp"
         app:fabCradleVerticalOffset="10dp"
         app:fabCradleRoundedCornerRadius="20dp"
-        android:layout_gravity="bottom">
+        android:layout_gravity="bottom"
+        android:theme="@style/Theme.MaterialComponents.Light"
+        >
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"

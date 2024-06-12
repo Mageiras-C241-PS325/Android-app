@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.mageiras.R
 import com.capstone.mageiras.data.dummy.DummyData
+import com.capstone.mageiras.databinding.FragmentHomeBinding
 import com.capstone.mageiras.ui.adapter.ListIngredientsAdapter
 import com.capstone.mageiras.ui.adapter.ListRecipesAdapter
 import com.capstone.mageiras.ui.setting.SettingActivity
@@ -26,8 +27,9 @@ private const val LIST_RECIPES = "param2"
 class HomeFragment : Fragment() {
     //    private var listIngredients: String? = null
     private var recipesList: ArrayList<DummyData.Recipes>? = null
-    private lateinit var recommendedRecipesRV: RecyclerView
-    private lateinit var refrigeratorIngredientsRV: RecyclerView
+
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,24 +46,18 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recommendedRecipesRV = view.findViewById(R.id.carousel_rv_recipes)
-        refrigeratorIngredientsRV = view.findViewById(R.id.rv_ingredients)
         showRecyclerList()
-        createAction(view)
-        showAuth(view)
-    }
-
-    private fun createAction(view: View) {
-        val settingButton: ImageButton = view.findViewById(R.id.button_settings)
-        settingButton.setOnClickListener {
-            val intent = Intent(requireContext(), SettingActivity::class.java)
+        binding.buttonSettings.setOnClickListener {
+            val intent = Intent(requireActivity(), SettingActivity::class.java)
             startActivity(intent)
         }
+        showAuth(view)
     }
 
     private fun showAuth(view: View) {
@@ -84,7 +80,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun showRecyclerList() {
-        recommendedRecipesRV.setLayoutManager(
+        binding.carouselRvRecipes.setLayoutManager(
             LinearLayoutManager(
                 requireContext(),
                 LinearLayoutManager.HORIZONTAL,
@@ -94,15 +90,15 @@ class HomeFragment : Fragment() {
         val dummyData = DummyData()
         Log.d("List recipes", dummyData.getDummyRecipesData().toString())
         val listRecipesAdapter = ListRecipesAdapter(dummyData.getDummyRecipesData())
-        recommendedRecipesRV.adapter = listRecipesAdapter
+        binding.carouselRvRecipes.adapter = listRecipesAdapter
 
-        refrigeratorIngredientsRV.setLayoutManager(
+        binding.rvIngredients.setLayoutManager(
             LinearLayoutManager(
                 requireContext()
             )
         )
         val listIngredientsAdapter = ListIngredientsAdapter(dummyData.getDummyIngredientsData())
-        refrigeratorIngredientsRV.adapter = listIngredientsAdapter
+        binding.rvIngredients.adapter = listIngredientsAdapter
     }
 
     companion object {

@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             val newFragment: Fragment = when (item.itemId) {
-                R.id.menu_fridge -> showHomeFragment()
+                R.id.menu_fridge -> HomeFragment()
                 R.id.menu_recipes -> RecipeFragment()
                 else -> showHomeFragment() // Default ke HomeFragment jika tidak ada yang cocok
             }

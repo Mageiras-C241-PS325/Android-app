@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.capstone.mageiras.databinding.ActivityLoginBinding
 import com.capstone.mageiras.ui.AuthViewModelFactory
 import com.capstone.mageiras.ui.main.MainActivity
+import com.capstone.mageiras.ui.register.RegisterActivity
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -54,6 +55,11 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        binding.toRegister.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+        }
     }
 
     private fun signIn(email: String, password: String) {

@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.capstone.mageiras.R
 import com.capstone.mageiras.databinding.ActivityRegisterBinding
 import com.capstone.mageiras.ui.AuthViewModelFactory
+import com.capstone.mageiras.ui.login.LoginActivity
 import com.capstone.mageiras.ui.main.MainActivity
 import com.capstone.mageiras.ui.welcome.WelcomeActivity
 import com.google.firebase.Firebase
@@ -37,17 +38,23 @@ class RegisterActivity : AppCompatActivity() {
         val viewModel: RegisterViewModel = ViewModelProvider(this,factory)[RegisterViewModel::class.java]
 
         // Check for confirm password is the same as password
-//        binding.edRegisterConfirmPassword.setOnFocusChangeListener { _, hasFocus ->
-//            if (!hasFocus) {
-//                if (binding.edRegisterPassword.text.toString() != binding.edRegisterConfirmPassword.text.toString()) {
-//                    binding.tilConfirmPassword.error = "Password not match"
-//                    binding.edRegisterConfirmPassword.error = "Password not match"
-//                } else {
-//                    binding.tilConfirmPassword.error = null
-//                    binding.edRegisterConfirmPassword.error = null
-//                }
-//            }
-//        }
+        binding.edRegisterConfirmPassword.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                if (binding.edRegisterPassword.text.toString() != binding.edRegisterConfirmPassword.text.toString()) {
+                    binding.tilConfirmPassword.error = "Password not match"
+                    binding.edRegisterConfirmPassword.error = "Password not match"
+                } else {
+                    binding.tilConfirmPassword.error = null
+                    binding.edRegisterConfirmPassword.error = null
+                }
+            }
+        }
+
+        binding.toLogin.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+        }
 
         binding.buttonRegister.setOnClickListener {
             viewModel.createAccount(binding.edRegisterEmail.text.toString(),binding.edRegisterPassword.text.toString()).addOnCompleteListener { task ->

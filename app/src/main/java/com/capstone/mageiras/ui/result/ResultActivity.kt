@@ -21,7 +21,7 @@ import org.tensorflow.lite.task.vision.detector.Detection
 
 class ResultActivity : AppCompatActivity() {
 
-//    private lateinit var imageClassifierHelper: ImageClassifierHelper
+    private lateinit var imageClassifierHelper: ImageClassifierHelper
     private var currentImageUri: Uri? = null
     private lateinit var tfliteModel: TensorFlowLiteModel
     private lateinit var binding: ActivityResultBinding
@@ -33,6 +33,10 @@ class ResultActivity : AppCompatActivity() {
         val imageUriString = intent.getStringExtra(CameraXActivity.EXTRA_CAMERAX_IMAGE)
         currentImageUri = Uri.parse(imageUriString)
 
+        binding.fabCancel.setOnClickListener {
+            finish()
+        }
+
         binding.ivPreview.setImageURI(currentImageUri)
 //        currentImageUri.let {
 //            analyzeImage()
@@ -40,50 +44,51 @@ class ResultActivity : AppCompatActivity() {
 
         showBottomSheetDialog()
 
-        tfliteModel = TensorFlowLiteModel(this, "cancer_classification.tflite")
-        var output  = FloatArray(2)
+        tfliteModel = TensorFlowLiteModel(this, "best_float32.tflite")
+//        var output  = FloatArray(2)
         CoroutineScope(Dispatchers.Main).launch {
             val imageBitmap = tfliteModel.toBitmap(currentImageUri!!)
-            output = tfliteModel.runModelOnImage(imageBitmap)
+            val output = tfliteModel.runModelOnImage(imageBitmap)
+            println(output)
         }
-        Toast.makeText(this, output.toString(), Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this, output.toString(), Toast.LENGTH_SHORT).show()
     }
 
-//    private fun analyzeImage() {
-//        imageClassifierHelper = ImageClassifierHelper(
-//            context = this,
-//            classifierListener = object : ImageClassifierHelper.ClassifierListener {
-//                override fun onError(error: String) {
-//                    runOnUiThread {
-//                        Toast.makeText(this@ResultActivity, error, Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//
-//                override fun onResults(results: List<Detection>?, inferenceTime: Long) {
-//                    runOnUiThread {
-//                        results?.let {
-//                            if (it.isNotEmpty() && it[0].categories.isNotEmpty()) {
-//                                println(it)
-//                                showToast(it.toString())
-////                                Log.i("resultScan", it[0].categories[0].displayName)
-////                                    it[0].categories.sortedByDescending { it?.score }
-////                                val displayResult =
-////                                    sortedCategories.joinToString("\n") {
-////                                        "${it.label} " + NumberFormat.getPercentInstance()
-////                                            .format(it.score).trim()
-////                                    }
-////                                moveToResult(displayResult)
-//                            } else {
-//                                showToast(getString(R.string.no_result_found))
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        )
-//        currentImageUri?.let { this.imageClassifierHelper.classifyStaticImage(it) }
-////        intent.putExtra(ResultActivity.EXTRA_RESULT, result)
-//    }
+    private fun analyzeImage() {
+        imageClassifierHelper = ImageClassifierHelper(
+            context = this,
+            classifierListener = object : ImageClassifierHelper.ClassifierListener {
+                override fun onError(error: String) {
+                    runOnUiThread {
+                        Toast.makeText(this@ResultActivity, error, Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onResults(results: List<Detection>?, inferenceTime: Long) {
+                    runOnUiThread {
+                        results?.let {
+                            if (it.isNotEmpty() && it[0].categories.isNotEmpty()) {
+                                println(it)
+                                showToast(it.toString())
+//                                Log.i("resultScan", it[0].categories[0].displayName)
+//                                    it[0].categories.sortedByDescending { it?.score }
+//                                val displayResult =
+//                                    sortedCategories.joinToString("\n") {
+//                                        "${it.label} " + NumberFormat.getPercentInstance()
+//                                            .format(it.score).trim()
+//                                    }
+//                                moveToResult(displayResult)
+                            } else {
+                                showToast(getString(R.string.no_result_found))
+                            }
+                        }
+                    }
+                }
+            }
+        )
+        currentImageUri?.let { this.imageClassifierHelper.classifyStaticImage(it) }
+//        intent.putExtra(ResultActivity.EXTRA_RESULT, result)
+    }
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
@@ -113,4 +118,5 @@ class ResultActivity : AppCompatActivity() {
 
         bottomSheetDialog.show()
     }
+
 }

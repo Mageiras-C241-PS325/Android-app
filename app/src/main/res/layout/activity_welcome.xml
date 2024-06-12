@@ -9,6 +9,8 @@
     android:theme="@style/Theme.AppCompat.Light.NoActionBar"
     tools:context=".ui.welcome.WelcomeActivity">
 
+
+
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"

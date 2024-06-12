@@ -183,12 +183,12 @@
         android:layout_marginBottom="25dp"
         android:background="@drawable/rounded_button"
         android:text="@string/register"
-        app:layout_constraintBottom_toTopOf="@+id/toLogin"
+        app:layout_constraintBottom_toTopOf="@+id/toLoginLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
     
     <LinearLayout
-        android:id="@+id/toLogin"
+        android:id="@+id/toLoginLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -201,6 +201,7 @@
             android:layout_height="wrap_content"
             android:text="@string/already_have_an_account"/>
         <TextView
+            android:id="@+id/toLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"

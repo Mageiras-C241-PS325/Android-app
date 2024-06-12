@@ -13,33 +13,25 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.Interpreter
-import org.tensorflow.lite.support.common.FileUtil
-import org.tensorflow.lite.support.common.TensorOperator
-import org.tensorflow.lite.support.common.TensorProcessor
 import org.tensorflow.lite.support.common.ops.CastOp
 import org.tensorflow.lite.support.common.ops.NormalizeOp
 import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.image.ops.ResizeOp
-import org.tensorflow.lite.support.image.ops.ResizeWithCropOrPadOp
-import org.tensorflow.lite.support.model.Model
-import org.tensorflow.lite.task.vision.detector.Detection
+import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
+import org.tensorflow.lite.task.vision.detector.ObjectDetector
 import java.io.FileInputStream
-import java.nio.ByteBuffer
-import java.nio.ByteOrder
 import java.nio.MappedByteBuffer
 import java.nio.channels.FileChannel
 
 class TensorFlowLiteModel(private val context: Context, private val modelName: String) {
 
     private var tflite: Interpreter? = null
-    private var imageSizeX: Int = 224
-    private var imageSizeY: Int = 224
-
-    val modelFile: MappedByteBuffer = FileUtil.loadMappedFile(context, modelName)
+    private var imageSizeX: Int = 640
+    private var imageSizeY: Int = 640
 
     init {
-        tflite = Interpreter(modelFile)
+        tflite = Interpreter(loadModelFile())
     }
 
     private fun loadModelFile(): MappedByteBuffer {
@@ -51,8 +43,10 @@ class TensorFlowLiteModel(private val context: Context, private val modelName: S
         return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength)
     }
 
-    suspend fun runModelOnImage(bitmap: Bitmap): FloatArray = withContext(Dispatchers.Default) {
-
+    suspend fun runModelOnImage(bitmap: Bitmap) = withContext(Dispatchers.Default) {
+        val outputShape = tflite?.getOutputTensor(0)?.shape()
+        val numChannel = outputShape?.get(1)
+        val numElements = outputShape?.get(2)
         val tensorImage = TensorImage(DataType.FLOAT32)
         tensorImage.load(bitmap)
         val imageProcessor = ImageProcessor.Builder()
@@ -62,17 +56,23 @@ class TensorFlowLiteModel(private val context: Context, private val modelName: S
             .build()
         val tImage = imageProcessor.process(tensorImage)
         val tfliteModel = tflite ?: throw RuntimeException("TFLite model is not initialized.")
-        val output = FloatArray(2)
+        val output = Array(1) { Array(42) { FloatArray(8400) } }
+//        val output = TensorBuffer.createFixedSize(intArrayOf(1 , numChannel!!, numElements!!), DataType.FLOAT32)
         try {
-            tfliteModel.run(tImage.buffer.rewind(), output)
+            tfliteModel.run(tImage.buffer, output)
         } catch (e: Exception) {
             e.printStackTrace()
             withContext(Dispatchers.Main) {
                 Toast.makeText(context, "Error running model", Toast.LENGTH_SHORT).show()
             }
         }
-        println(output)
-        Log.d("output", output.joinToString(prefix = "[", postfix = "]") { it.toString() })
+        for (i in output.indices) {
+            for (j in output[i].indices) {
+                for (k in output[i][j].indices) {
+                    println("output[$i][$j][$k] = ${output[i][j][k]}")
+                }
+            }
+        }
         return@withContext output
     }
 

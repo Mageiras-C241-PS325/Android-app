@@ -62,6 +62,15 @@ dependencies {
     implementation(libs.camera.lifecycle)
     implementation(libs.camera.view)
 
+    //glide
+    implementation(libs.glide)
+    annotationProcessor(libs.glideCompiler)
+
+    //retrofit + okhttp3
+    implementation(libs.retrofit)
+    implementation(libs.converterGson)
+    implementation(libs.loggingInterceptor)
+
     //room
     implementation(libs.roomKtx)
     implementation(libs.roomRuntime)

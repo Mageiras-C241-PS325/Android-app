@@ -20,6 +20,10 @@ tensorflowLiteTaskVision = "0.4.4"
 tensorflowLiteMetadata = "0.1.0"
 tensorflowLiteGpu = "2.9.0"
 tensorflowLite = "2.9.0"
+glide = "4.12.0"
+retrofit = "2.9.0"
+converterGson = "2.9.0"
+loggingInterceptor = "4.11.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -43,6 +47,11 @@ tensorflowLiteTaskVision = { module = "org.tensorflow:tensorflow-lite-task-visio
 tensorflowLiteMetadata = { module = "org.tensorflow:tensorflow-lite-metadata", version.ref = "tensorflowLiteMetadata" }
 tensorflowLiteGpu = { module = "org.tensorflow:tensorflow-lite-gpu", version.ref = "tensorflowLiteGpu" }
 tensorflowLite = { module = "org.tensorflow:tensorflow-lite", version.ref = "tensorflowLite" }
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+glideCompiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+converterGson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "converterGson" }
+loggingInterceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "loggingInterceptor" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -29,6 +29,39 @@ class DummyData {
             "https://awsimages.detik.net.id/community/media/visual/2022/10/08/gado-gado_11.png?w=1200",
             "Gado-Gado",
             "20"
+        ),Recipes(
+            "https://awsimages.detik.net.id/community/media/visual/2022/10/08/gado-gado_11.png?w=1200",
+            "Gado-Gado",
+            "20"
+        ),Recipes(
+            "https://awsimages.detik.net.id/community/media/visual/2022/10/08/gado-gado_11.png?w=1200",
+            "Gado-Gado",
+            "20"
+        ),Recipes(
+            "https://awsimages.detik.net.id/community/media/visual/2022/10/08/gado-gado_11.png?w=1200",
+            "Gado-Gado",
+            "20"
+        ),Recipes(
+            "https://awsimages.detik.net.id/community/media/visual/2022/10/08/gado-gado_11.png?w=1200",
+            "Gado-Gado",
+            "20"
+        ),Recipes(
+            "https://awsimages.detik.net.id/community/media/visual/2022/10/08/gado-gado_11.png?w=1200",
+            "Gado-Gado",
+            "20"
+        ),Recipes(
+            "https://awsimages.detik.net.id/community/media/visual/2022/10/08/gado-gado_11.png?w=1200",
+            "Gado-Gado",
+            "20"
+        ),Recipes(
+            "https://awsimages.detik.net.id/community/media/visual/2022/10/08/gado-gado_11.png?w=1200",
+            "Gado-Gado",
+            "20"
+        ),
+        Recipes(
+            "https://awsimages.detik.net.id/community/media/visual/2022/10/08/gado-gado_11.png?w=1200",
+            "Gado-Gado",
+            "20"
         ),
     )
 

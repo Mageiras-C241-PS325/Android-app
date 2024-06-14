@@ -14,7 +14,7 @@ import com.capstone.mageiras.databinding.RecipesCardBinding
 class ListRecipesAdapter(private val listRecipes: ArrayList<DummyData.Recipes>) : RecyclerView.Adapter<ListRecipesAdapter.ListViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.recipes_card, parent, false)
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.recipes_fragment_item_row, parent, false)
         return ListViewHolder(view)
     }
 
@@ -24,7 +24,7 @@ class ListRecipesAdapter(private val listRecipes: ArrayList<DummyData.Recipes>) 
         val recipes = listRecipes[position]
 
         holder.tvName.text = recipes.title
-        holder.tvCookingTime.text = recipes.cookingTime
+//        holder.tvCookingTime.text = recipes.cookingTime
         Glide.with(holder.itemView.context)
             .load(recipes.picture)
             .into(holder.imgPhoto)
@@ -34,6 +34,6 @@ class ListRecipesAdapter(private val listRecipes: ArrayList<DummyData.Recipes>) 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imgPhoto: ImageView = itemView.findViewById(R.id.iv_recipes_picture)
         val tvName: TextView = itemView.findViewById(R.id.tv_recipes_name)
-        val tvCookingTime: TextView = itemView.findViewById(R.id.tv_recipes_cooking_time)
+//        val tvCookingTime: TextView = itemView.findViewById(R.id.tv_recipes_cooking_time)
     }
 }

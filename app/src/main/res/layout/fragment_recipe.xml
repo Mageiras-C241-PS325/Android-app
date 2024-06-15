@@ -33,8 +33,11 @@
             android:paddingBottom="128dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_recipes_header" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_recipes_header"
+            app:layout_constraintVertical_bias="0.0"
+            tools:listitem="@layout/recipes_fragment_item_row" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

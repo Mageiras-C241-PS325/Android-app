@@ -1,30 +1,32 @@
 package com.capstone.mageiras.ui.result
 
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.lifecycle.ViewModelProvider
 import com.capstone.mageiras.R
 import com.capstone.mageiras.databinding.ActivityResultBinding
-import com.capstone.mageiras.helper.ImageClassifierHelper
-import com.capstone.mageiras.helper.TensorFlowLiteModel
+import com.capstone.mageiras.ui.PredictViewModelFactory
 import com.capstone.mageiras.ui.camerax.CameraXActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import org.tensorflow.lite.task.vision.classifier.Classifications
-import org.tensorflow.lite.task.vision.detector.Detection
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
+import com.capstone.mageiras.data.Result
 
 class ResultActivity : AppCompatActivity() {
 
-    private lateinit var imageClassifierHelper: ImageClassifierHelper
     private var currentImageUri: Uri? = null
-    private lateinit var tfliteModel: TensorFlowLiteModel
     private lateinit var binding: ActivityResultBinding
+    private lateinit var viewModel: ResultViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResultBinding.inflate(layoutInflater)
@@ -38,56 +40,37 @@ class ResultActivity : AppCompatActivity() {
         }
 
         binding.ivPreview.setImageURI(currentImageUri)
-//        currentImageUri.let {
-//            analyzeImage()
-//        }
 
-        showBottomSheetDialog()
+        val factory: PredictViewModelFactory = PredictViewModelFactory.getInstance()
+        viewModel = ViewModelProvider(this, factory)[ResultViewModel::class.java]
 
-        tfliteModel = TensorFlowLiteModel(this, "best_float32.tflite")
-//        var output  = FloatArray(2)
-        CoroutineScope(Dispatchers.Main).launch {
-            val imageBitmap = tfliteModel.toBitmap(currentImageUri!!)
-            val output = tfliteModel.runModelOnImage(imageBitmap)
-            println(output)
-        }
-//        Toast.makeText(this, output.toString(), Toast.LENGTH_SHORT).show()
-    }
+        val localCurrentImageUri = currentImageUri
+        if (localCurrentImageUri != null) {
+            val file = File(localCurrentImageUri.path.toString())
+            val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+            val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
 
-    private fun analyzeImage() {
-        imageClassifierHelper = ImageClassifierHelper(
-            context = this,
-            classifierListener = object : ImageClassifierHelper.ClassifierListener {
-                override fun onError(error: String) {
-                    runOnUiThread {
-                        Toast.makeText(this@ResultActivity, error, Toast.LENGTH_SHORT).show()
+            viewModel.predictImage(body).observe(this@ResultActivity) { result ->
+                when (result) {
+                    is Result.Loading -> {
+                        showToast("Loading...")
                     }
-                }
 
-                override fun onResults(results: List<Detection>?, inferenceTime: Long) {
-                    runOnUiThread {
-                        results?.let {
-                            if (it.isNotEmpty() && it[0].categories.isNotEmpty()) {
-                                println(it)
-                                showToast(it.toString())
-//                                Log.i("resultScan", it[0].categories[0].displayName)
-//                                    it[0].categories.sortedByDescending { it?.score }
-//                                val displayResult =
-//                                    sortedCategories.joinToString("\n") {
-//                                        "${it.label} " + NumberFormat.getPercentInstance()
-//                                            .format(it.score).trim()
-//                                    }
-//                                moveToResult(displayResult)
-                            } else {
-                                showToast(getString(R.string.no_result_found))
-                            }
-                        }
+                    is Result.Success -> {
+                        val response = result.data
+                        showToast(response.toString())
                     }
+
+                    is Result.Error -> {
+                        showToast(result.error)
+                    }
+
+                    else -> {}
                 }
             }
-        )
-        currentImageUri?.let { this.imageClassifierHelper.classifyStaticImage(it) }
-//        intent.putExtra(ResultActivity.EXTRA_RESULT, result)
+            showBottomSheetDialog()
+        }
+
     }
 
     private fun showToast(message: String) {
@@ -118,5 +101,4 @@ class ResultActivity : AppCompatActivity() {
 
         bottomSheetDialog.show()
     }
-
 }

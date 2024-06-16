@@ -18,6 +18,13 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+            "String",
+            "BASE_ML_URL",
+            "\"http://35.226.149.200/\""
+        )
+
     }
 
     buildTypes {
@@ -38,6 +45,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -82,7 +90,14 @@ dependencies {
     implementation(libs.tensorflowLiteGpu)
     implementation(libs.tensorflowLite)
 
+    //coroutines
+    implementation(libs.lifecycleViewModelKtx)
+    implementation(libs.coroutinesCore)
+    implementation(libs.lifecycleLivedataKtx)
+    implementation(libs.coroutinesAndroid)
+
     implementation("com.google.android.material:material:1.3.0-alpha03")
 
     implementation("com.github.bumptech.glide:glide:4.16.0")
+
 }

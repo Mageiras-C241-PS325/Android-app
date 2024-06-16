@@ -176,8 +176,6 @@ class CameraXActivity : AppCompatActivity() {
                 Log.e(TAG, "cameraFlash: ${exc.message}")
             }
         }, ContextCompat.getMainExecutor(this))
-
-
     }
 
     fun flipCamera() {
@@ -211,6 +209,5 @@ class CameraXActivity : AppCompatActivity() {
         const val EXTRA_CAMERAX_IMAGE = "CameraX Image"
         const val CAMERAX_RESULT = 200
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
-
     }
 }

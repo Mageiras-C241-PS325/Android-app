@@ -20,6 +20,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import com.capstone.mageiras.data.Result
+import com.capstone.mageiras.databinding.DialogBottomSheetBinding
 
 class ResultActivity : AppCompatActivity() {
 
@@ -79,7 +80,9 @@ class ResultActivity : AppCompatActivity() {
 
     private fun showBottomSheetDialog() {
         val bottomSheetDialog = BottomSheetDialog(this)
-        val view = layoutInflater.inflate(R.layout.dialog_bottom_sheet, null)
+
+        val binding = DialogBottomSheetBinding.inflate(layoutInflater)
+
 
         // Dapatkan tinggi layar
         val displayMetrics = resources.displayMetrics
@@ -90,12 +93,12 @@ class ResultActivity : AppCompatActivity() {
             CoordinatorLayout.LayoutParams.MATCH_PARENT,
             screenHeight
         )
-        view.layoutParams = layoutParams
+        binding.root.layoutParams = layoutParams
 
-        bottomSheetDialog.setContentView(view)
+        bottomSheetDialog.setContentView(binding.root)
 
         // Dapatkan BottomSheetBehavior dan atur isFitToContents menjadi false dan setExpandedOffset menjadi 0
-        val bottomSheetBehavior = BottomSheetBehavior.from(view.parent as View)
+        val bottomSheetBehavior = BottomSheetBehavior.from(binding.root.parent as View)
         bottomSheetBehavior.isFitToContents = false
         bottomSheetBehavior.setExpandedOffset(0)
 

@@ -24,7 +24,6 @@ android {
             "BASE_ML_URL",
             "\"http://35.226.149.200/\""
         )
-
     }
 
     buildTypes {
@@ -96,8 +95,7 @@ dependencies {
     implementation(libs.lifecycleLivedataKtx)
     implementation(libs.coroutinesAndroid)
 
-    implementation("com.google.android.material:material:1.3.0-alpha03")
-
-    implementation("com.github.bumptech.glide:glide:4.16.0")
+    //material alpha
+    implementation(libs.materialAlpha)
 
 }

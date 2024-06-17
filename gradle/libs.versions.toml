@@ -29,6 +29,7 @@ lifecycleViewModelKtx = "2.7.0"
 lifecycleLivedataKtx = "2.7.0"
 coroutinesCore = "1.7.3"
 coroutinesAndroid = "1.7.3"
+materialAlpha = "1.3.0-alpha03"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -62,6 +63,7 @@ lifecycleViewModelKtx = { group = "androidx.lifecycle", name = "lifecycle-viewmo
 lifecycleLivedataKtx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 coroutinesCore = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutinesCore" }
 coroutinesAndroid = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutinesAndroid" }
+materialAlpha = { group = "com.google.android.material:material", name = "materialAlpha", version.ref = "materialAlpha" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

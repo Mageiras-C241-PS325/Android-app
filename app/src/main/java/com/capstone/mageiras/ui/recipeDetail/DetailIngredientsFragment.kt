@@ -45,6 +45,8 @@ class DetailIngredientsFragment : Fragment() {
                 false
             )
         )
+        binding.tvIngredientsCount.text =
+            getString(R.string.ingredients_amount, listIngredients?.size.toString())
     }
 
     companion object {

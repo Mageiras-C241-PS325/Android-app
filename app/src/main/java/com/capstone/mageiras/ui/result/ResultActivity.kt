@@ -1,15 +1,12 @@
 package com.capstone.mageiras.ui.result
 
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.lifecycle.ViewModelProvider
-import com.capstone.mageiras.R
 import com.capstone.mageiras.databinding.ActivityResultBinding
 import com.capstone.mageiras.ui.PredictViewModelFactory
 import com.capstone.mageiras.ui.camerax.CameraXActivity
@@ -19,7 +16,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
-import com.capstone.mageiras.data.Result
+import com.capstone.mageiras.data.ResultState
 import com.capstone.mageiras.databinding.DialogBottomSheetBinding
 
 class ResultActivity : AppCompatActivity() {
@@ -53,16 +50,16 @@ class ResultActivity : AppCompatActivity() {
 
             viewModel.predictImage(body).observe(this@ResultActivity) { result ->
                 when (result) {
-                    is Result.Loading -> {
+                    is ResultState.Loading -> {
                         showToast("Loading...")
                     }
 
-                    is Result.Success -> {
+                    is ResultState.Success -> {
                         val response = result.data
                         showToast(response.toString())
                     }
 
-                    is Result.Error -> {
+                    is ResultState.Error -> {
                         showToast(result.error)
                     }
 

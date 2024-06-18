@@ -96,6 +96,14 @@ dependencies {
     implementation(libs.coroutinesAndroid)
 
     //material alpha
-    implementation(libs.materialAlpha)
+    implementation( libs.material.v130alpha03 )
+
+    //datastore
+    implementation(libs.androidx.datastore.preferences)
+
+    //lifecycle
+    implementation(libs.androidx.lifecycle.viewmodel.ktx.v261)
+    implementation(libs.androidx.lifecycle.livedata.ktx.v261)
+    implementation(libs.androidx.activity.ktx)
 
 }

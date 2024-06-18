@@ -6,13 +6,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.capstone.mageiras.R
 import com.capstone.mageiras.data.dummy.DummyData
+import com.capstone.mageiras.data.remote.IDTokenCallback
+import com.capstone.mageiras.data.remote.idTokenRetriever
 import com.capstone.mageiras.databinding.FragmentHomeBinding
 import com.capstone.mageiras.ui.adapter.ListIngredientsAdapter
 import com.capstone.mageiras.ui.adapter.ListRecipesAdapter
@@ -39,6 +39,18 @@ class HomeFragment : Fragment() {
 //            listIngredients = it.getString(LIST_INGREDIENTS)
             recipesList = it.getParcelableArrayList<DummyData.Recipes>(LIST_RECIPES)
         }
+
+        // START EXAMPLE USAGE OF idTokenRetriever
+        val idTokenCallback = object : IDTokenCallback {
+            override fun onCallback(idToken: String?) {
+                Log.d("homeidToken", idToken.toString())
+            }
+        }
+
+        val idToken =  idTokenRetriever(
+            idTokenCallback
+        )
+        // END EXAMPLE USAGE OF idTokenRetriever
 
     }
 

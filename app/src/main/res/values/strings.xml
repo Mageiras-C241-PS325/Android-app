@@ -10,12 +10,12 @@
     <string name="start_now">Start</string>
     <string name="desc_4">desk4</string>
     <string name="title_4">title4</string>
-    <string name="desc_3">desk3</string>
-    <string name="title_3">tittle3</string>
-    <string name="desc_2">desk2</string>
-    <string name="title_2">title2</string>
-    <string name="desc_1">desk1</string>
-    <string name="title_1">title1</string>
+    <string name="desc_3">Get personalized recipe recommendations based on your dietary preferences, cooking skills, and the ingredients you have on hand</string>
+    <string name="title_3">Discover Recipes</string>
+    <string name="desc_2">Help you create tasty and satisfying meals with whatever you have in your kitchen.</string>
+    <string name="title_2">Cook Delicious Meals with What You Have</string>
+    <string name="desc_1">Help you keep track of the ingredients in your fridge</string>
+    <string name="title_1">Never Waste Food Again</string>
     <string name="skip_this"><![CDATA[Skip This >]]></string>
     <string name="register">Register</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
@@ -47,4 +47,5 @@
     <string name="no_result_found">No result found</string>
     <string name="empty_image_warning">Catch image first</string>
     <string name="your_recommended_recipes">Your Recommended Recipes</string>
+    <string name="string_title_4">New Discover</string>
 </resources>

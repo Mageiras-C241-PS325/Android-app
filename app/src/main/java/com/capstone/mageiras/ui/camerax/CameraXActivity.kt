@@ -129,6 +129,7 @@ class CameraXActivity : AppCompatActivity() {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     val intent = Intent(this@CameraXActivity, ResultActivity::class.java)
                     intent.putExtra(EXTRA_CAMERAX_IMAGE, output.savedUri.toString())
+                    intent.putExtra(FROM_CAMERA, "ini camerax")
                     startActivity(intent)
                 }
 
@@ -209,5 +210,6 @@ class CameraXActivity : AppCompatActivity() {
         const val EXTRA_CAMERAX_IMAGE = "CameraX Image"
         const val CAMERAX_RESULT = 200
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
+        const val FROM_CAMERA = "from camerax"
     }
 }

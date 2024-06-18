@@ -25,9 +25,9 @@ class AuthViewModelFactory(private val authRepository: AuthRepository): ViewMode
         @Volatile
         private var instance: AuthViewModelFactory? = null
 
-        fun getInstance(): AuthViewModelFactory =
+        fun getInstance(context: Context): AuthViewModelFactory =
             instance ?: synchronized(this) {
-                instance ?: AuthViewModelFactory(Injection.provideRepository())
+                instance ?: AuthViewModelFactory(Injection.provideRepository(context))
             }.also { instance = it }
     }
 }

@@ -34,7 +34,7 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val factory: AuthViewModelFactory = AuthViewModelFactory.getInstance()
+        val factory: AuthViewModelFactory = AuthViewModelFactory.getInstance(this)
         val viewModel: RegisterViewModel = ViewModelProvider(this,factory)[RegisterViewModel::class.java]
 
         // Check for confirm password is the same as password

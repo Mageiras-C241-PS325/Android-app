@@ -96,15 +96,7 @@ dependencies {
     implementation(libs.coroutinesAndroid)
 
     //material alpha
-    implementation( libs.material.v130alpha03 )
-
-    //datastore
-    implementation(libs.androidx.datastore.preferences)
-
-    //lifecycle
-    implementation(libs.androidx.lifecycle.viewmodel.ktx.v261)
-    implementation(libs.androidx.lifecycle.livedata.ktx.v261)
-    implementation(libs.androidx.activity.ktx)
+    implementation("com.google.android.material:material:1.3.0-alpha03")
 
     implementation(libs.androidx.viewpager2)
 }

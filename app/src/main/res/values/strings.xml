@@ -47,6 +47,7 @@
     <string name="no_result_found">No result found</string>
     <string name="empty_image_warning">Catch image first</string>
     <string name="your_recommended_recipes">Your Recommended Recipes</string>
+    <string name="string_title_4">New Discover</string>
     <string name="genre">Genre</string>
     <string name="tab_text_ingredient">Ingredients</string>
     <string name="tab_text_steps">Steps</string>

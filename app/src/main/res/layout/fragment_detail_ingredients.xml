@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.recipeDetail.DetailIngredientsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tab_text_ingredient"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        />
+    <TextView
+        android:id="@+id/tv_ingredients_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="@string/placeholder_ingredients_amount" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_recipe_detail_ingredients"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="24dp"
+        tools:listitem="@layout/ingredients_list_item"
+        />
+    </LinearLayout>
+
+</FrameLayout>

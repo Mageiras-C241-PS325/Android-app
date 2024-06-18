@@ -38,13 +38,19 @@ class RecipeDetailActivity : AppCompatActivity() {
         //TODO CHANGE TO REAL DATA
         setUpTabLayoutWithViewPager(recipes)
         }
-
+        setupAction()
     }
 
     private fun setupContent(recipes: DummyData.Recipes) {
         binding.tvRecipeName.text = recipes.title
         binding.tvRecipeGenre.text = recipes.genre
         Glide.with(this).load(recipes.picture).into(binding.imvCircularWithStroke)
+    }
+
+    private fun setupAction() {
+        binding.fabCancel.setOnClickListener {
+            finish()
+        }
     }
 
     //TODO CHANGE TO REAL DATA

@@ -10,10 +10,12 @@ import com.bumptech.glide.Glide
 import com.capstone.mageiras.R
 import com.capstone.mageiras.data.dummy.DummyData
 
-class ListIngredientsAdapter(private val listIngredients: ArrayList<DummyData.Ingredients>):RecyclerView.Adapter<ListIngredientsAdapter.ListViewHolder>() {
+class ListIngredientsAdapter(private val listIngredients: ArrayList<DummyData.Ingredients>) :
+    RecyclerView.Adapter<ListIngredientsAdapter.ListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.ingredients_list_item, parent, false)
+        val view: View = LayoutInflater.from(parent.context)
+            .inflate(R.layout.ingredients_list_item, parent, false)
         return ListViewHolder(view)
     }
 
@@ -28,6 +30,7 @@ class ListIngredientsAdapter(private val listIngredients: ArrayList<DummyData.In
             .load(ingredients.picture)
             .into(holder.imgPhoto)
     }
+
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imgPhoto: ImageView = itemView.findViewById(R.id.iv_ingredients_picture)
         val tvIngredientName: TextView = itemView.findViewById(R.id.tv_ingredients_name)

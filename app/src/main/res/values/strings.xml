@@ -54,5 +54,8 @@
     <string name="title">title</string>
     <string name="placeholder_ingredients_amount">6 item</string>
     <string name="ingredients_amount">%s ingredients</string>
+    <string name="steps_amount">%s steps</string>
+    <string name="placeholder_step_description">Step Description</string>
+    <string name="steps_placeholder">3 Steps</string>
 
 </resources>

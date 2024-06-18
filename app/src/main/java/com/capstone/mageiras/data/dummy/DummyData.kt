@@ -12,6 +12,7 @@ class DummyData {
         val cookingTime: String,
         val ingredients: String,
         val genre: String,
+        val steps: String,
     ) : Parcelable {
     }
 
@@ -22,6 +23,7 @@ class DummyData {
             "20",
             "pig;cow;sheep",
             "Vegetable",
+            "Boil the potato;cook the vegetable;mix the sauce",
         ),
         Recipes(
             "https://img-global.cpcdn.com/recipes/df29e9f4c38facdc/400x400cq70/photo.jpg",
@@ -29,6 +31,7 @@ class DummyData {
             "20",
             "pig;onion;bawang",
             "NonVegetable",
+            "Boil the potato;cook the vegetable;mix the sauce",
         ),
     )
 

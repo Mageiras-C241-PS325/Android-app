@@ -73,6 +73,16 @@
             android:layout_height="10dp"
             motion:layout_constraintBottom_toBottomOf="@+id/menu2"
             motion:layout_constraintTop_toTopOf="@+id/menu2" />
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="@id/titleMenu1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@id/titleMenu1"
+            motion:layout_constraintStart_toStartOf="@id/titleMenu1"
+            android:layout_marginTop="8dp"
+            android:id="@+id/descMenu1"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp" />
     </ConstraintSet>
 
 
@@ -114,6 +124,16 @@
                 motion:attributeName="crossfade"
                 motion:customFloatValue="0" />
         </Constraint>
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="@id/titleMenu2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@id/titleMenu2"
+            motion:layout_constraintStart_toStartOf="@id/logoMenu2"
+            android:layout_marginTop="8dp"
+            android:id="@+id/descMenu2"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp" />
     </ConstraintSet>
     <Transition
         motion:constraintSetStart="@+id/end"
@@ -160,6 +180,16 @@
                 motion:attributeName="crossfade"
                 motion:customFloatValue="0" />
         </Constraint>
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="@id/titleMenu3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@id/titleMenu3"
+            motion:layout_constraintStart_toStartOf="@id/titleMenu3"
+            android:layout_marginTop="8dp"
+            android:id="@+id/descMenu3"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp" />
     </ConstraintSet>
     <Transition
         motion:constraintSetStart="@+id/menu2"
@@ -212,6 +242,15 @@
                 motion:attributeName="crossfade"
                 motion:customFloatValue="1" />
         </Constraint>
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="@id/titleMenu4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@id/titleMenu4"
+            motion:layout_constraintStart_toStartOf="@id/titleMenu4"
+            android:layout_marginTop="8dp"
+            android:id="@+id/descMenu4"
+            android:layout_marginStart="16dp" />
     </ConstraintSet>
     <Transition
         motion:constraintSetStart="@+id/menu3"

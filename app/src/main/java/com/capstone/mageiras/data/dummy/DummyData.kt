@@ -6,19 +6,32 @@ import kotlinx.parcelize.Parcelize
 class DummyData {
 
     @Parcelize
-    data class Recipes(val picture: String, val title: String, val cookingTime: String): Parcelable {
+    data class Recipes(
+        val picture: String,
+        val title: String,
+        val cookingTime: String,
+        val ingredients: String,
+        val genre: String,
+        val steps: String,
+    ) : Parcelable {
     }
 
     val dummyRecipes: ArrayList<Recipes> = arrayListOf(
         Recipes(
             "https://img-global.cpcdn.com/recipes/962fdfc636d35cb1/680x482cq70/gado-gado-surabaya-gado2-siram-foto-resep-utama.jpg",
             "Gado-Gado",
-            "20"
+            "20",
+            "pig;cow;sheep",
+            "Vegetable",
+            "Boil the potato;cook the vegetable;mix the sauce",
         ),
         Recipes(
             "https://img-global.cpcdn.com/recipes/df29e9f4c38facdc/400x400cq70/photo.jpg",
             "Gado-Gado",
-            "20"
+            "20",
+            "pig;onion;bawang",
+            "NonVegetable",
+            "Boil the potato;cook the vegetable;mix the sauce",
         ),
     )
 

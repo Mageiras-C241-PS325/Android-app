@@ -13,6 +13,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="30dp"
+        android:src="@drawable/ic_cancel"
+        android:backgroundTint="@color/white"/>
+
     <ImageButton
         android:id="@+id/flash_button"
         android:layout_width="60dp"
@@ -21,7 +31,7 @@
         android:background="@drawable/circle"
         android:src="@drawable/baseline_flash_on_24"
         android:tintMode="src_atop"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/viewFinder"
         app:tint="@color/white"
         tools:ignore="speakableTextPresent" />

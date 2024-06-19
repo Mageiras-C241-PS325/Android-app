@@ -33,6 +33,8 @@ lifecycleViewModelKtx = "2.7.0"
 lifecycleLivedataKtx = "2.7.0"
 coroutinesCore = "1.7.3"
 coroutinesAndroid = "1.7.3"
+materialAlpha = "1.3.0-alpha03"
+viewpager2 = "1.1.0"
 
 [libraries]
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
@@ -40,6 +42,7 @@ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = 
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 androidx-lifecycle-livedata-ktx-v261 = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtxVersion" }
 androidx-lifecycle-viewmodel-ktx-v261 = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtxVersion" }
+androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -71,6 +74,7 @@ lifecycleViewModelKtx = { group = "androidx.lifecycle", name = "lifecycle-viewmo
 lifecycleLivedataKtx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 coroutinesCore = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutinesCore" }
 coroutinesAndroid = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutinesAndroid" }
+materialAlpha = { group = "com.google.android.material:material", name = "materialAlpha", version.ref = "materialAlpha" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

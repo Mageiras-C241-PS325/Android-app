@@ -57,5 +57,6 @@
     <string name="steps_amount">%s steps</string>
     <string name="placeholder_step_description">Step Description</string>
     <string name="steps_placeholder">3 Steps</string>
+    <string name="no_ingredient_text">No ingredient here, Scan it</string>
 
 </resources>

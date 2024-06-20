@@ -7,14 +7,15 @@
     android:layout_height="175dp"
     android:layout_gravity="center"
     android:layout_marginTop="4dp"
-    android:layout_marginStart="30dp"
     android:layout_marginBottom="20dp"
-    card_view:cardCornerRadius="16dp"
-    android:layout_weight="2">
+    android:layout_marginHorizontal="10dp"
+    android:layout_weight="2"
+    card_view:cardCornerRadius="16dp">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -37,19 +38,26 @@
                 android:background="@drawable/gradient"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintHorizontal_bias="0.0"
                 card_view:layout_constraintStart_toStartOf="parent"
-                card_view:layout_constraintTop_toTopOf="parent" />
+                card_view:layout_constraintTop_toTopOf="parent"
+                card_view:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/tv_recipes_name"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/recipes_name"
-                android:layout_marginStart="10dp"
-                android:textSize="20sp"
-                android:textColor="@color/white"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
                 android:fontFamily="@font/poppins_semi_bold"
+                android:maxLines="2"
+                android:text="@string/recipes_name"
+                android:textColor="@color/white"
+                android:textSize="20sp"
                 card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintHorizontal_bias="0.0"
                 card_view:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -58,8 +58,12 @@ class IngredientRepository private constructor(
             emit(Result.Success(response.ingredients))
         } catch (e: HttpException) {
             val jsonInString = e.response()?.errorBody()?.string()
-            emit(Result.Error(jsonInString!!))
-            println(e.message)
+            when(e.code()) {
+                401 -> emit(Result.Error("Please reload the page"))
+                500 -> emit(Result.Error("Server error"))
+                else -> emit(Result.Error(jsonInString!!))
+            }
+            Log.d("Errorcok", jsonInString!!)
         } catch (e: Exception) {
             println(e.message) // Print the exception to the log
             emit(Result.Error("Error when caching API"))
@@ -73,8 +77,12 @@ class IngredientRepository private constructor(
             emit(Result.Success(response.recipes as ArrayList<RecipesItem>))
         } catch (e: HttpException) {
             val jsonInString = e.response()?.errorBody()?.string()
-            emit(Result.Error(jsonInString!!))
-            println(e.message)
+            when(e.code()) {
+                404 -> emit(Result.Error("You have no ingredient"))
+                401 -> emit(Result.Error("Please reload the page"))
+                500 -> emit(Result.Error("Server error"))
+                else -> emit(Result.Error(jsonInString!!))
+            }
         } catch (e: Exception) {
             println(e.message) // Print the exception to the log
             emit(Result.Error("Error when caching API"))

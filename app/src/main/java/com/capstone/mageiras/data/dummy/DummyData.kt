@@ -13,8 +13,7 @@ class DummyData {
         val ingredients: String,
         val genre: String,
         val steps: String,
-    ) : Parcelable {
-    }
+    ) : Parcelable
 
     val dummyRecipes: ArrayList<Recipes> = arrayListOf(
         Recipes(
@@ -38,12 +37,10 @@ class DummyData {
     fun getDummyRecipesData() = dummyRecipes
 
     @Parcelize
-    data class Ingredients(val name: String, val amount: String, val picture: String) : Parcelable {
-    }
+    data class Ingredients(val name: String, val amount: String, val picture: String) : Parcelable
 
     @Parcelize
-    data class itemIngredient(val name: String, val amount: String, val picture: Int) : Parcelable {
-    }
+    data class itemIngredient(val name: String, val amount: String, val picture: Int) : Parcelable
 
     val dummyIngredients: ArrayList<Ingredients> = arrayListOf(
         Ingredients(

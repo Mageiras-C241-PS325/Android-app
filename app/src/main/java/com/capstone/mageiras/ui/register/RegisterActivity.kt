@@ -23,6 +23,7 @@ import com.capstone.mageiras.data.Result
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -98,9 +99,9 @@ class RegisterActivity : AppCompatActivity() {
             val password = binding.edRegisterPassword.text.toString()
             val username = binding.edRegisterUsername.text.toString()
 
-            val emailBody = RequestBody.create("text/plain".toMediaTypeOrNull(), email)
-            val passwordBody = RequestBody.create("text/plain".toMediaTypeOrNull(), password)
-            val usernameBody = RequestBody.create("text/plain".toMediaTypeOrNull(), username)
+            val emailBody = email.toRequestBody("text/plain".toMediaTypeOrNull())
+            val passwordBody = password.toRequestBody("text/plain".toMediaTypeOrNull())
+            val usernameBody = username.toRequestBody("text/plain".toMediaTypeOrNull())
 
             viewModel.register(emailBody,passwordBody,usernameBody).observe(this) {
                 when(it){

@@ -1,5 +1,6 @@
 package com.capstone.mageiras.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.capstone.mageiras.data.remote.retrofit.ApiService
@@ -24,6 +25,7 @@ class PredictRepository private constructor(
             emit(Result.Error(error.error))
             println(e.message)
         } catch (e: Exception) {
+            Log.e("PredictRepository", e.message.toString())
             println(e.message) // Print the exception to the log
             emit(Result.Error("Error when caching API"))
         }

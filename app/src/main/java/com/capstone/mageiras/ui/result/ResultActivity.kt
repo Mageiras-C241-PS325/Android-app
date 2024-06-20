@@ -28,6 +28,7 @@ import com.capstone.mageiras.data.remote.response.IngredientsItem
 import com.capstone.mageiras.ui.success.SuccessActivity
 import com.google.gson.Gson
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 
 class ResultActivity : AppCompatActivity() {
 
@@ -144,7 +145,7 @@ class ResultActivity : AppCompatActivity() {
             val gson = Gson()
             val json = gson.toJson(list)
 
-            val ingredient = RequestBody.create("text/plain".toMediaTypeOrNull(), json)
+            val ingredient = json.toRequestBody("text/plain".toMediaTypeOrNull())
 
             Log.d("resultttt", json.toString())
 

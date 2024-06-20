@@ -2,6 +2,9 @@ package com.capstone.mageiras.ui.setting
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -25,6 +28,20 @@ class SettingActivity : AppCompatActivity() {
             insets
         }
         createAction()
+        showAuth()
+    }
+
+    private fun showAuth() {
+        val user = Firebase.auth.currentUser
+        if (user != null) {
+            val name = user.email
+            binding.tvProfileUsername.text = name
+        } else {
+            // No user is signed in
+            Log.d("User", "No user is signed in")
+            val intent = Intent(this, WelcomeActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun createAction() {

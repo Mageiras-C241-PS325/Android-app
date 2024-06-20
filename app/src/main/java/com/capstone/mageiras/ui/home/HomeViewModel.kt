@@ -10,5 +10,5 @@ class HomeViewModel (
 ) : ViewModel() {
 
     fun getIngredients() = ingredientRepository.getIngredients()
-
+    fun getRecipes() = ingredientRepository.getRecommendRecipes()
 }

@@ -14,10 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.mageiras.R
 import com.capstone.mageiras.adapter.IngredientAdapter
 import com.capstone.mageiras.adapter.ListRecipesAdapter
-import com.capstone.mageiras.adapter.RecipeAdapter
 import com.capstone.mageiras.data.Result
 import com.capstone.mageiras.data.dummy.DummyData
-import com.capstone.mageiras.data.remote.response.RecipesItem
 import com.capstone.mageiras.databinding.FragmentHomeBinding
 import com.capstone.mageiras.ui.IngredientViewModelFactory
 import com.capstone.mageiras.ui.setting.SettingActivity
@@ -48,14 +46,13 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showRecyclerList()
         binding.buttonSettings.setOnClickListener {
             val intent = Intent(requireActivity(), SettingActivity::class.java)
             startActivity(intent)
@@ -63,20 +60,17 @@ class HomeFragment : Fragment() {
         showAuth(view)
 
         val factory: IngredientViewModelFactory = IngredientViewModelFactory.getInstance()
-        val viewModel: HomeViewModel = ViewModelProvider(this,factory)[HomeViewModel::class.java]
+        val viewModel: HomeViewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
 
         viewModel.getIngredients().observe(requireActivity()) { result ->
             if (result != null) {
                 when (result) {
                     is Result.Loading -> {
+                        binding.loading.visibility = View.VISIBLE
                     }
+
                     is Result.Success -> {
                         val data = result.data
-//                        Toast.makeText(
-//                            requireActivity(),
-//                            "success" + data.toString(),
-//                            Toast.LENGTH_LONG
-//                        ).show()
                         binding.rvIngredients.setLayoutManager(
                             LinearLayoutManager(
                                 requireContext()
@@ -89,15 +83,62 @@ class HomeFragment : Fragment() {
                             binding.ivEmptyImage.visibility = View.VISIBLE
                             binding.tvEmptyText.visibility = View.VISIBLE
                         } else {
+                            binding.whatInsideRefri.visibility = View.VISIBLE
                             binding.rvIngredients.visibility = View.VISIBLE
                             binding.ivEmptyImage.visibility = View.GONE
                             binding.tvEmptyText.visibility = View.GONE
                         }
                     }
+
                     is Result.Error -> {
+                        binding.loading.visibility = View.GONE
+                        binding.ivEmptyImage.visibility = View.VISIBLE
+                        binding.tvEmptyText.visibility = View.VISIBLE
                         Toast.makeText(
                             requireActivity(),
-                            "error" + result.error,
+                            result.error,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            }
+        }
+
+        viewModel.getRecipes().observe(requireActivity()) { result ->
+            if (result != null) {
+                when (result) {
+                    is Result.Loading -> {
+                        binding.loading.visibility = View.VISIBLE
+                    }
+
+                    is Result.Success -> {
+                        binding.loading.visibility = View.GONE
+                        binding.tvEmptyText.visibility = View.GONE
+                        binding.ivEmptyImage.visibility = View.GONE
+                        binding.tvRecommendedRecipes.visibility = View.VISIBLE
+                        binding.carouselRvRecipes.visibility = View.VISIBLE
+
+                        val data = result.data.slice(0 until 5)
+
+                        binding.carouselRvRecipes.layoutManager =
+                            LinearLayoutManager(
+                                requireContext(),
+                                LinearLayoutManager.HORIZONTAL,
+                                false
+                            )
+                        val listIngredientsAdapter = ListRecipesAdapter(data)
+                        binding.carouselRvRecipes.adapter = listIngredientsAdapter
+                    }
+
+                    is Result.Error -> {
+                        binding.loading.visibility = View.GONE
+                        binding.tvRecommendedRecipes.visibility = View.GONE
+                        binding.carouselRvRecipes.visibility = View.GONE
+                        binding.whatInsideRefri.visibility = View.GONE
+
+                        Toast.makeText(
+                            requireActivity(),
+                            result.error,
                             Toast.LENGTH_LONG
                         ).show()
                     }
@@ -124,29 +165,6 @@ class HomeFragment : Fragment() {
             val intent = Intent(requireContext(), WelcomeActivity::class.java)
             startActivity(intent)
         }
-    }
-
-    private fun showRecyclerList() {
-        binding.carouselRvRecipes.setLayoutManager(
-            LinearLayoutManager(
-                requireContext(),
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )
-        )
-        val dummyData = DummyData()
-        Log.d("List recipes", dummyData.getDummyRecipesData().toString())
-//        val listRecipesAdapter = ListRecipesAdapter(dummyData.getDummyRecipesData())
-        val listRecipesAdapter = ListRecipesAdapter(ArrayList<RecipesItem>())
-        binding.carouselRvRecipes.adapter = listRecipesAdapter
-
-//        binding.rvIngredients.setLayoutManager(
-//            LinearLayoutManager(
-//                requireContext()
-//            )
-//        )
-//        val listIngredientsAdapter = ListIngredientsAdapter(dummyData.getDummyIngredientsData())
-//        binding.rvIngredients.adapter = listIngredientsAdapter
     }
 
     companion object {

@@ -19,6 +19,7 @@ import com.google.firebase.auth.auth
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import com.capstone.mageiras.data.Result
+import okhttp3.RequestBody.Companion.toRequestBody
 
 class LoginActivity : AppCompatActivity() {
 
@@ -58,13 +59,13 @@ class LoginActivity : AppCompatActivity() {
             viewModel.signIn(email, password).addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     binding.loading.visibility = View.GONE
-                    Log.d(ContentValues.TAG, "signInWithEmail:success")
+                    Log.d(TAG, "signInWithEmail:success")
                     val intent = Intent(this, MainActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
                 } else {
                     binding.loading.visibility = View.GONE
-                    Log.w(ContentValues.TAG, "signInWithEmail:failure", task.exception)
+                    Log.w(TAG, "signInWithEmail:failure", task.exception)
                     Toast.makeText(
                         baseContext,
                         "Authentication failed.",
@@ -73,8 +74,8 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
 
-            val emailBody = RequestBody.create("text/plain".toMediaTypeOrNull(), email)
-            val passwordBody = RequestBody.create("text/plain".toMediaTypeOrNull(), password)
+            val emailBody = email.toRequestBody("text/plain".toMediaTypeOrNull())
+            val passwordBody = password.toRequestBody("text/plain".toMediaTypeOrNull())
 
 //            viewModel.login(emailBody, passwordBody).observe(this) {
 //                when (it) {

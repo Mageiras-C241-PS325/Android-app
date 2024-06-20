@@ -23,7 +23,7 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import com.capstone.mageiras.data.Result
 import com.capstone.mageiras.databinding.DialogBottomSheetBinding
-import com.capstone.mageiras.adapter.IngredientAdapter
+import com.capstone.mageiras.adapter.ListIngredientsAdapter
 import com.capstone.mageiras.data.remote.response.IngredientsItem
 import com.capstone.mageiras.ui.success.SuccessActivity
 import com.google.gson.Gson
@@ -126,7 +126,7 @@ class ResultActivity : AppCompatActivity() {
         }
 
         binding.rvScanResult.layoutManager = LinearLayoutManager(this)
-        val listIngredientsAdapter = IngredientAdapter(list)
+        val listIngredientsAdapter = ListIngredientsAdapter(list as ArrayList<IngredientsItem>)
         binding.rvScanResult.adapter = listIngredientsAdapter
 
         binding.buttonAddScan.setOnClickListener {

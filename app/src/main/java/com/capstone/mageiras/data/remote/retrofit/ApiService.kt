@@ -8,9 +8,8 @@ import com.capstone.mageiras.data.remote.response.RecipeResponse
 import com.capstone.mageiras.data.remote.response.RegisterResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
@@ -26,6 +25,7 @@ interface ApiService {
     @Multipart
     @POST("ingredients/addmany")
     suspend fun addManyIngredients(
+        @Header("Authorization") token: String,
         @Part("ingredients") ingredients: RequestBody
     ): AddIngredientResponse
 
@@ -52,9 +52,13 @@ interface ApiService {
     ): RegisterResponse
 
     @GET("ingredients")
-    suspend fun getIngredients(): IngredientResponse
+    suspend fun getIngredients(
+        @Header("Authorization") token: String,
+    ): IngredientResponse
 
     @POST("recommend")
-    suspend fun getRecommendRecipe(): RecipeResponse
+    suspend fun getRecommendRecipe(
+        @Header("Authorization") token: String,
+    ): RecipeResponse
 
 }

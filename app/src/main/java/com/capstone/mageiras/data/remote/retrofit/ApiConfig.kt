@@ -34,16 +34,16 @@ object ApiConfig {
         } else {
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
         }
-        val authInterceptor = Interceptor { chain ->
-            val req = chain.request()
-            val requestHeaders = req.newBuilder()
-                .addHeader("Authorization", "Bearer $token")
-                .build()
-            chain.proceed(requestHeaders)
-        }
+//        val authInterceptor = Interceptor { chain ->
+//            val req = chain.request()
+//            val requestHeaders = req.newBuilder()
+//                .addHeader("Authorization", "Bearer $token")
+//                .build()
+//            chain.proceed(requestHeaders)
+//        }
         val client = OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
-            .addInterceptor(authInterceptor)
+//            .addInterceptor(authInterceptor)
             .build()
         val retrofit = Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)

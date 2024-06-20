@@ -10,8 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.capstone.mageiras.R
 import com.capstone.mageiras.data.dummy.DummyData
+import com.capstone.mageiras.data.remote.response.IngredientsItem
 
-class ListIngredientsAdapter(private val listIngredients: ArrayList<DummyData.Ingredients>) :
+class ListIngredientsAdapter(private val listIngredients: ArrayList<IngredientsItem>) :
     RecyclerView.Adapter<ListIngredientsAdapter.ListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -26,11 +27,10 @@ class ListIngredientsAdapter(private val listIngredients: ArrayList<DummyData.In
         val ingredients = listIngredients[position]
 
         holder.tvIngredientName.text = ingredients.name
-        holder.tvIngredientsAmount.text = ""
+        holder.tvIngredientsAmount.text = ingredients.amount.toString()
 //        Glide.with(holder.itemView.context)
 //            .load(ingredients.picture)
 //            .into(holder.imgPhoto)
-        holder.imgPhoto.setImageResource(R.drawable.ic_ingredient)
     }
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

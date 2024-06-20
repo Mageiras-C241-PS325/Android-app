@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.capstone.mageiras.adapter.IngredientAdapter
+import com.capstone.mageiras.adapter.ListRecipesAdapter
 import com.capstone.mageiras.adapter.RecipeAdapter
 import com.capstone.mageiras.data.Result
 import com.capstone.mageiras.databinding.FragmentRecipeBinding
@@ -49,7 +49,7 @@ class RecipeFragment : Fragment() {
                         val data = result.data
 
                         binding.rvRecipes.layoutManager = LinearLayoutManager(requireActivity())
-                        val listIngredientsAdapter = RecipeAdapter(data)
+                        val listIngredientsAdapter = ListRecipesAdapter(data)
                         binding.rvRecipes.adapter = listIngredientsAdapter
 
 //                        binding.rvIngredients.setLayoutManager(

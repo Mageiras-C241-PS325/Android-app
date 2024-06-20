@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.capstone.mageiras.data.dummy.DummyData
+import com.capstone.mageiras.data.remote.response.IngredientsItem
 import com.capstone.mageiras.data.remote.response.RecipesItem
 import com.capstone.mageiras.ui.recipeDetail.DetailIngredientsFragment
 import com.capstone.mageiras.ui.recipeDetail.DetailStepsFragment
+import java.time.LocalDateTime
 
 //TODO CHANGE TO REAL DATA
 class RecipeDetailPagerAdapter(
@@ -22,18 +24,18 @@ class RecipeDetailPagerAdapter(
         var fragment: Fragment? = null
         when (position) {
             0 -> {
-                val ingredients: ArrayList<RecipesItem> =
+                val ingredients: ArrayList<IngredientsItem> =
                     recipes.ingredients.split(";").map { ingredient ->
                         if (ingredient == "") {
                             return@map null
                         }
-
-                        DummyData.Ingredients(
-                            ingredient,
-                            "1",
-                            "https://umsu.ac.id/health/wp-content/uploads/2023/12/khasiat-luar-biasa-bawang-putih-untuk-kesehatan.jpg"
+                        IngredientsItem(
+                            amount = 1,
+                            lastUpdate = LocalDateTime.now().toString(),
+                            name = ingredient,
+                            "1"
                         )
-                    } as ArrayList<RecipesItem>
+                    } as ArrayList<IngredientsItem>
                 Log.d("RecipeDetailPagerAdapter", "createFragment: $ingredients")
                 fragment = DetailIngredientsFragment.newInstance(ingredients)
             }

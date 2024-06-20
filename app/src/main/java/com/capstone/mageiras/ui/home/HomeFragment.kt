@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.mageiras.R
+import com.capstone.mageiras.adapter.IngredientAdapter
 import com.capstone.mageiras.adapter.ListRecipesAdapter
 import com.capstone.mageiras.adapter.RecipeAdapter
 import com.capstone.mageiras.data.Result
@@ -81,8 +82,17 @@ class HomeFragment : Fragment() {
                                 requireContext()
                             )
                         )
-                        val listIngredientsAdapter = RecipeAdapter(data)
+                        val listIngredientsAdapter = IngredientAdapter(data)
                         binding.rvIngredients.adapter = listIngredientsAdapter
+                        if (data.isNullOrEmpty()) {
+                            binding.rvIngredients.visibility = View.GONE
+                            binding.ivEmptyImage.visibility = View.VISIBLE
+                            binding.tvEmptyText.visibility = View.VISIBLE
+                        } else {
+                            binding.rvIngredients.visibility = View.VISIBLE
+                            binding.ivEmptyImage.visibility = View.GONE
+                            binding.tvEmptyText.visibility = View.GONE
+                        }
                     }
                     is Result.Error -> {
                         Toast.makeText(

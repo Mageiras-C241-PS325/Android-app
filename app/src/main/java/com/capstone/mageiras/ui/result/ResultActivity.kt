@@ -129,6 +129,16 @@ class ResultActivity : AppCompatActivity() {
         val listIngredientsAdapter = ListIngredientsAdapter(list as ArrayList<IngredientsItem>)
         binding.rvScanResult.adapter = listIngredientsAdapter
 
+        if (list.isNullOrEmpty()) {
+            binding.rvScanResult.visibility = View.GONE
+            binding.ivEmptyState.visibility = View.VISIBLE
+            binding.tvEmptyState.visibility = View.VISIBLE
+        } else {
+            binding.rvScanResult.visibility = View.VISIBLE
+            binding.ivEmptyState.visibility = View.GONE
+            binding.tvEmptyState.visibility = View.GONE
+        }
+
         binding.buttonAddScan.setOnClickListener {
 
             val gson = Gson()

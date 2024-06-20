@@ -15,7 +15,7 @@ import com.capstone.mageiras.data.remote.response.RecipesItem
 import com.capstone.mageiras.databinding.RecipesCardBinding
 import com.capstone.mageiras.ui.recipeDetail.RecipeDetailActivity
 
-class ListRecipesAdapter(private val listRecipes: ArrayList<RecipesItem>) : RecyclerView.Adapter<ListRecipesAdapter.ListViewHolder>(){
+class ListRecipesAdapter(private val listRecipes: List<RecipesItem>) : RecyclerView.Adapter<ListRecipesAdapter.ListViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.recipes_card, parent, false)
@@ -38,7 +38,6 @@ class ListRecipesAdapter(private val listRecipes: ArrayList<RecipesItem>) : Recy
             intent.putExtra(RecipeDetailActivity.EXTRA_RECIPES, recipes)
             startActivity(holder.itemView.context, intent, null)
         }
-
     }
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

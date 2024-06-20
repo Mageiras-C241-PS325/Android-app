@@ -46,11 +46,18 @@ class RecipeFragment : Fragment() {
                     }
                     is Result.Success -> {
                         binding.loading.visibility = View.GONE
+                        binding.ivNoRecipe.visibility = View.GONE
+                        binding.tvNoRecipe.visibility = View.GONE
+                        binding.rvRecipes.visibility = View.VISIBLE
+
                         val data = result.data
 
                         binding.rvRecipes.layoutManager = LinearLayoutManager(requireActivity())
                         val listIngredientsAdapter = ListRecipesAdapter(data)
                         binding.rvRecipes.adapter = listIngredientsAdapter
+
+
+
 
 //                        binding.rvIngredients.setLayoutManager(
 //                            LinearLayoutManager(
@@ -67,6 +74,9 @@ class RecipeFragment : Fragment() {
                             "error" + result.error,
                             Toast.LENGTH_LONG
                         ).show()
+                        binding.ivNoRecipe.visibility = View.VISIBLE
+                        binding.tvNoRecipe.visibility = View.VISIBLE
+                        binding.rvRecipes.visibility = View.GONE
                     }
                 }
             }

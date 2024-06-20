@@ -37,6 +37,27 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_recipes_header"
             tools:listitem="@layout/recipes_fragment_item_row" />
 
+        <ImageView
+            android:id="@+id/iv_no_recipe"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/ic_no_recipe"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_no_recipe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Where's your ingredients?"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_no_recipe"/>
+        
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/loading"
             android:layout_width="0dp"

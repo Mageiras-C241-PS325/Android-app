@@ -12,21 +12,17 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.mageiras.R
-import com.capstone.mageiras.data.dummy.DummyData
-import com.capstone.mageiras.data.remote.IDTokenCallback
-import com.capstone.mageiras.data.remote.idTokenRetriever
-import com.capstone.mageiras.databinding.FragmentHomeBinding
-import com.capstone.mageiras.adapter.ListIngredientsAdapter
 import com.capstone.mageiras.adapter.ListRecipesAdapter
 import com.capstone.mageiras.adapter.RecipeAdapter
-import com.capstone.mageiras.ui.AuthViewModelFactory
+import com.capstone.mageiras.data.Result
+import com.capstone.mageiras.data.dummy.DummyData
+import com.capstone.mageiras.databinding.FragmentHomeBinding
 import com.capstone.mageiras.ui.IngredientViewModelFactory
-import com.capstone.mageiras.ui.register.RegisterViewModel
 import com.capstone.mageiras.ui.setting.SettingActivity
 import com.capstone.mageiras.ui.welcome.WelcomeActivity
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
-import com.capstone.mageiras.data.Result
+
 //private const val LIST_INGREDIENTS = "param1"
 private const val LIST_RECIPES = "param2"
 
@@ -44,17 +40,6 @@ class HomeFragment : Fragment() {
 //            listIngredients = it.getString(LIST_INGREDIENTS)
             recipesList = it.getParcelableArrayList<DummyData.Recipes>(LIST_RECIPES)
         }
-
-        // START EXAMPLE USAGE OF idTokenRetriever
-        val idTokenCallback = object : IDTokenCallback {
-            override fun onCallback(idToken: String?) {
-                Log.d("homeidToken", idToken.toString())
-            }
-        }
-
-        val idToken =  idTokenRetriever(
-            idTokenCallback
-        )
 
     }
 

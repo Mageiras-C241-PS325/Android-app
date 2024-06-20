@@ -1,8 +1,10 @@
 package com.capstone.mageiras.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.capstone.mageiras.data.Result
+import com.capstone.mageiras.data.remote.getIdToken
 import com.capstone.mageiras.data.remote.response.AddIngredientResponse
 import com.capstone.mageiras.data.remote.response.ErrorPredictResponse
 import com.capstone.mageiras.data.remote.response.IngredientsItem
@@ -35,7 +37,7 @@ class IngredientRepository private constructor(
     fun addManyIngredients(ingredients: RequestBody): LiveData<Result<AddIngredientResponse>> = liveData {
         emit(Result.Loading)
         try {
-            val response = apiService.addManyIngredients(ingredients)
+            val response = apiService.addManyIngredients("Bearer ${getIdToken()}", ingredients)
             emit(Result.Success(response))
         } catch (e: HttpException) {
             val jsonInString = e.response()?.errorBody()?.string()
@@ -50,7 +52,8 @@ class IngredientRepository private constructor(
     fun getIngredients(): LiveData<Result<List<IngredientsItem>>> = liveData {
         emit(Result.Loading)
         try {
-            val response = apiService.getIngredients()
+            Log.d("Token-getingredients", getIdToken())
+            val response = apiService.getIngredients("Bearer ${getIdToken()}")
             emit(Result.Success(response.ingredients))
         } catch (e: HttpException) {
             val jsonInString = e.response()?.errorBody()?.string()

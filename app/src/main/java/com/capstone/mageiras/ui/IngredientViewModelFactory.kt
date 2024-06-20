@@ -7,6 +7,7 @@ import com.capstone.mageiras.data.repository.IngredientRepository
 import com.capstone.mageiras.di.Injection
 import com.capstone.mageiras.ui.home.HomeViewModel
 import com.capstone.mageiras.ui.login.LoginViewModel
+import com.capstone.mageiras.ui.recipe.RecipeViewModel
 import com.capstone.mageiras.ui.register.RegisterViewModel
 
 class IngredientViewModelFactory(private val ingredientRepository: IngredientRepository): ViewModelProvider.NewInstanceFactory(){
@@ -15,6 +16,9 @@ class IngredientViewModelFactory(private val ingredientRepository: IngredientRep
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
             return HomeViewModel(ingredientRepository) as T
+        }
+        if (modelClass.isAssignableFrom(RecipeViewModel::class.java)) {
+            return RecipeViewModel(ingredientRepository) as T
         }
 
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

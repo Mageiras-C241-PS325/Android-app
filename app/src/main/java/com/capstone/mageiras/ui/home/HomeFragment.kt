@@ -16,12 +16,9 @@ import com.capstone.mageiras.data.dummy.DummyData
 import com.capstone.mageiras.data.remote.IDTokenCallback
 import com.capstone.mageiras.data.remote.idTokenRetriever
 import com.capstone.mageiras.databinding.FragmentHomeBinding
-import com.capstone.mageiras.adapter.ListIngredientsAdapter
 import com.capstone.mageiras.adapter.ListRecipesAdapter
-import com.capstone.mageiras.adapter.RecipeAdapter
-import com.capstone.mageiras.ui.AuthViewModelFactory
+import com.capstone.mageiras.adapter.IngredientAdapter
 import com.capstone.mageiras.ui.IngredientViewModelFactory
-import com.capstone.mageiras.ui.register.RegisterViewModel
 import com.capstone.mageiras.ui.setting.SettingActivity
 import com.capstone.mageiras.ui.welcome.WelcomeActivity
 import com.google.firebase.Firebase
@@ -95,7 +92,7 @@ class HomeFragment : Fragment() {
                                 requireContext()
                             )
                         )
-                        val listIngredientsAdapter = RecipeAdapter(data)
+                        val listIngredientsAdapter = IngredientAdapter(data)
                         binding.rvIngredients.adapter = listIngredientsAdapter
                     }
                     is Result.Error -> {

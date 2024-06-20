@@ -14,6 +14,7 @@ import com.capstone.mageiras.R
 import com.capstone.mageiras.data.dummy.DummyData
 import com.capstone.mageiras.databinding.ActivityRecipeDetailBinding
 import com.capstone.mageiras.adapter.RecipeDetailPagerAdapter
+import com.capstone.mageiras.data.remote.response.RecipesItem
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -32,7 +33,7 @@ class RecipeDetailActivity : AppCompatActivity() {
             insets
         }
 
-        val recipes = intent.extras?.getParcelable(EXTRA_RECIPES) as? DummyData.Recipes
+        val recipes = intent.extras?.getParcelable(EXTRA_RECIPES) as? RecipesItem
         if (recipes != null) {
             setupContent(recipes)
         //TODO CHANGE TO REAL DATA
@@ -41,10 +42,10 @@ class RecipeDetailActivity : AppCompatActivity() {
         setupAction()
     }
 
-    private fun setupContent(recipes: DummyData.Recipes) {
+    private fun setupContent(recipes: RecipesItem) {
         binding.tvRecipeName.text = recipes.title
         binding.tvRecipeGenre.text = recipes.genre
-        Glide.with(this).load(recipes.picture).into(binding.imvCircularWithStroke)
+        Glide.with(this).load(recipes.imageUrl).into(binding.imvCircularWithStroke)
     }
 
     private fun setupAction() {
@@ -54,7 +55,7 @@ class RecipeDetailActivity : AppCompatActivity() {
     }
 
     //TODO CHANGE TO REAL DATA
-    private fun setUpTabLayoutWithViewPager(recipes: DummyData.Recipes) {
+    private fun setUpTabLayoutWithViewPager(recipes: RecipesItem) {
         val sectionsPagerAdapter = RecipeDetailPagerAdapter(this, recipes)
         val viewPager: ViewPager2 = binding.viewPager
         viewPager.adapter = sectionsPagerAdapter

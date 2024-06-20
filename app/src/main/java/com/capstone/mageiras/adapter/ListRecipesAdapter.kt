@@ -43,6 +43,5 @@ class ListRecipesAdapter(private val listRecipes: ArrayList<DummyData.Recipes>) 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imgPhoto: ImageView = itemView.findViewById(R.id.iv_recipes_picture)
         val tvName: TextView = itemView.findViewById(R.id.tv_recipes_name)
-//        val tvCookingTime: TextView = itemView.findViewById(R.id.tv_recipes_cooking_time)
     }
 }

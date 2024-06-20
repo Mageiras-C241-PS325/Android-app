@@ -11,6 +11,7 @@ import com.capstone.mageiras.R
 import com.capstone.mageiras.data.dummy.DummyData
 import com.capstone.mageiras.databinding.FragmentDetailIngredientsBinding
 import com.capstone.mageiras.adapter.ListIngredientsAdapter
+import com.capstone.mageiras.data.remote.response.RecipesItem
 
 private const val LIST_INGREDIENTS = "listIngredients"
 
@@ -51,7 +52,7 @@ class DetailIngredientsFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(listIngredients: ArrayList<DummyData.Ingredients>) =
+        fun newInstance(listIngredients: ArrayList<RecipesItem>) =
             DetailIngredientsFragment().apply {
                 arguments = Bundle().apply {
                     putParcelableArrayList(LIST_INGREDIENTS, listIngredients)

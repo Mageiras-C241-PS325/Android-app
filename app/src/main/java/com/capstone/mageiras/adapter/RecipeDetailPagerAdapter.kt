@@ -27,6 +27,7 @@ class RecipeDetailPagerAdapter(
                         if (ingredient == "") {
                             return@map null
                         }
+
                         DummyData.Ingredients(
                             ingredient,
                             "1",

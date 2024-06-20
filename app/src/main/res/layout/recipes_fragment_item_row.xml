@@ -55,7 +55,7 @@
                     android:maxLines="1"
                     android:scrollHorizontally="true"
                     android:textSize="20sp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/md_theme_inverseSurface"
                     card_view:layout_constraintBottom_toBottomOf="parent"
                     card_view:layout_constraintEnd_toEndOf="parent"
                     card_view:layout_constraintStart_toStartOf="parent"

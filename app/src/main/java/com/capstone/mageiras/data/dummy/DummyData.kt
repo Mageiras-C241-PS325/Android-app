@@ -41,6 +41,10 @@ class DummyData {
     data class Ingredients(val name: String, val amount: String, val picture: String) : Parcelable {
     }
 
+    @Parcelize
+    data class itemIngredient(val name: String, val amount: String, val picture: Int) : Parcelable {
+    }
+
     val dummyIngredients: ArrayList<Ingredients> = arrayListOf(
         Ingredients(
             "Bawang Putih",

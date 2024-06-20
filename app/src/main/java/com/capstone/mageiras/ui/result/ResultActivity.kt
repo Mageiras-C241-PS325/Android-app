@@ -78,14 +78,15 @@ class ResultActivity : AppCompatActivity() {
             viewModel.predictImage(body).observe(this@ResultActivity) { result ->
                 when (result) {
                     is Result.Loading -> {
-                        showToast("Loading...")
+                        binding.loadingScan.visibility = View.VISIBLE
                     }
                     is Result.Success -> {
+                        binding.loadingScan.visibility = View.GONE
                         output = result.data
-                        showToast(output.toString())
                         showBottomSheetDialog()
                     }
                     is Result.Error -> {
+                        binding.loadingScan.visibility = View.GONE
                         showToast(result.error)
                     }
                 }
@@ -127,7 +128,6 @@ class ResultActivity : AppCompatActivity() {
 
         bottomSheetDialog.show()
 
-//        val ingredientsItem = IngredientsItem()
         val what = output.groupingBy { it }.eachCount()
         val list = what.map { (name, amount) ->
             IngredientsItem(amount, null, name, null)
@@ -149,13 +149,15 @@ class ResultActivity : AppCompatActivity() {
             viewModel.addManyIngredients(ingredient).observe(this@ResultActivity) { result ->
                 when (result) {
                     is Result.Loading -> {
-                        showToast("Loading...")
+                        binding.loading.visibility = View.VISIBLE
                     }
                     is Result.Success -> {
+                        binding.loading.visibility = View.GONE
                         val intent = Intent(this, SuccessActivity::class.java)
                         startActivity(intent)
                     }
                     is Result.Error -> {
+                        binding.loading.visibility = View.GONE
                         showToast(result.error)
                     }
                 }
@@ -163,5 +165,3 @@ class ResultActivity : AppCompatActivity() {
         }
     }
 }
-
-data class Ingredient(val name: String, val amount: Int)

@@ -27,4 +27,5 @@ data class IngredientsItem(
 
 	@field:SerializedName("id")
 	val id: String? = null
+
 )

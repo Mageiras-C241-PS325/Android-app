@@ -88,6 +88,12 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            if (binding.edRegisterConfirmPassword.text.toString() != binding.edRegisterPassword.text.toString()) {
+                binding.tilConfirmPassword.error = "Password not match"
+                binding.edRegisterConfirmPassword.error = "Password not match"
+                return@setOnClickListener
+            }
+
             val email = binding.edRegisterEmail.text.toString()
             val password = binding.edRegisterPassword.text.toString()
             val username = binding.edRegisterUsername.text.toString()
@@ -95,23 +101,26 @@ class RegisterActivity : AppCompatActivity() {
             val emailBody = RequestBody.create("text/plain".toMediaTypeOrNull(), email)
             val passwordBody = RequestBody.create("text/plain".toMediaTypeOrNull(), password)
             val usernameBody = RequestBody.create("text/plain".toMediaTypeOrNull(), username)
+
             viewModel.register(emailBody,passwordBody,usernameBody).observe(this) {
                 when(it){
+                    is Result.Loading -> {
+                        binding.loading.visibility = android.view.View.VISIBLE
+                    }
                     is Result.Success -> {
+                        binding.loading.visibility = android.view.View.GONE
                         val intent = Intent(this, MainActivity::class.java)
                         intent.flags =
                             Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                         startActivity(intent)
                     }
                     is Result.Error -> {
+                        binding.loading.visibility = android.view.View.GONE
                         Toast.makeText(
                             baseContext,
                             "Authentication failed.",
                             Toast.LENGTH_SHORT,
                         ).show()
-                    }
-                    is Result.Loading -> {
-                        Log.d(TAG, "Loading")
                     }
                 }
             }

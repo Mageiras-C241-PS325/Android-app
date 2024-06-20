@@ -17,7 +17,10 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:padding="15dp"
-                android:src="@drawable/ic_cheese"
+                android:src="@drawable/ic_ingredient"
+                android:scaleType="centerCrop"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

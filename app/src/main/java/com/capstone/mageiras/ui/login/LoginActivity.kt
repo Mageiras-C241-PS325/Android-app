@@ -5,6 +5,7 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -52,13 +53,17 @@ class LoginActivity : AppCompatActivity() {
             val email = binding.edLoginEmail.text.toString()
             val password = binding.edLoginPassword.text.toString()
 
+            binding.loading.visibility = View.VISIBLE
+
             viewModel.signIn(email, password).addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    binding.loading.visibility = View.GONE
                     Log.d(ContentValues.TAG, "signInWithEmail:success")
                     val intent = Intent(this, MainActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
                 } else {
+                    binding.loading.visibility = View.GONE
                     Log.w(ContentValues.TAG, "signInWithEmail:failure", task.exception)
                     Toast.makeText(
                         baseContext,

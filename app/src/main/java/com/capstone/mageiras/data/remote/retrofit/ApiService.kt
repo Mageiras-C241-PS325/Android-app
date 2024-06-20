@@ -4,6 +4,7 @@ import com.capstone.mageiras.data.remote.response.AddIngredientResponse
 import com.capstone.mageiras.data.remote.response.IngredientResponse
 import com.capstone.mageiras.data.remote.response.LoginResponse
 import com.capstone.mageiras.data.remote.response.PredictResponse
+import com.capstone.mageiras.data.remote.response.RecipeResponse
 import com.capstone.mageiras.data.remote.response.RegisterResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -54,5 +55,10 @@ interface ApiService {
     suspend fun getIngredients(
         @Header("Authorization") token: String,
     ): IngredientResponse
+
+    @POST("recommend")
+    suspend fun getRecommendRecipe(
+        @Header("Authorization") token: String,
+    ): RecipeResponse
 
 }

@@ -16,6 +16,7 @@ import com.capstone.mageiras.adapter.ListRecipesAdapter
 import com.capstone.mageiras.adapter.RecipeAdapter
 import com.capstone.mageiras.data.Result
 import com.capstone.mageiras.data.dummy.DummyData
+import com.capstone.mageiras.data.remote.response.RecipesItem
 import com.capstone.mageiras.databinding.FragmentHomeBinding
 import com.capstone.mageiras.ui.IngredientViewModelFactory
 import com.capstone.mageiras.ui.setting.SettingActivity
@@ -125,7 +126,8 @@ class HomeFragment : Fragment() {
         )
         val dummyData = DummyData()
         Log.d("List recipes", dummyData.getDummyRecipesData().toString())
-        val listRecipesAdapter = ListRecipesAdapter(dummyData.getDummyRecipesData())
+//        val listRecipesAdapter = ListRecipesAdapter(dummyData.getDummyRecipesData())
+        val listRecipesAdapter = ListRecipesAdapter(ArrayList<RecipesItem>())
         binding.carouselRvRecipes.adapter = listRecipesAdapter
 
 //        binding.rvIngredients.setLayoutManager(

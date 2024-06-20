@@ -10,7 +10,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.mageiras.databinding.ActivityResultBinding
@@ -23,19 +22,12 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import com.capstone.mageiras.data.Result
-import com.capstone.mageiras.data.dummy.DummyData
 import com.capstone.mageiras.databinding.DialogBottomSheetBinding
 import com.capstone.mageiras.adapter.ListIngredientsAdapter
-import com.capstone.mageiras.adapter.RecipeAdapter
 import com.capstone.mageiras.data.remote.response.IngredientsItem
-import com.capstone.mageiras.ui.main.MainActivity
 import com.capstone.mageiras.ui.success.SuccessActivity
 import com.google.gson.Gson
-import com.google.gson.JsonObject
-import com.google.gson.JsonPrimitive
-import kotlinx.serialization.json.Json
 import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 
 class ResultActivity : AppCompatActivity() {
 
@@ -134,7 +126,7 @@ class ResultActivity : AppCompatActivity() {
         }
 
         binding.rvScanResult.layoutManager = LinearLayoutManager(this)
-        val listIngredientsAdapter = RecipeAdapter(list)
+        val listIngredientsAdapter = ListIngredientsAdapter(list as ArrayList<IngredientsItem>)
         binding.rvScanResult.adapter = listIngredientsAdapter
 
         binding.buttonAddScan.setOnClickListener {

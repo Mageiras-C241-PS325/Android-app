@@ -5,16 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.capstone.mageiras.R
-import com.capstone.mageiras.data.dummy.DummyData
 import com.capstone.mageiras.adapter.ListRecipesAdapter
-import com.google.android.material.bottomappbar.BottomAppBar
+import com.capstone.mageiras.adapter.RecipeAdapter
+import com.capstone.mageiras.data.Result
+import com.capstone.mageiras.databinding.FragmentRecipeBinding
+import com.capstone.mageiras.ui.IngredientViewModelFactory
 
 class RecipeFragment : Fragment() {
 
-    private lateinit var recipesRv: RecyclerView
+    private var _binding: FragmentRecipeBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,22 +27,59 @@ class RecipeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recipe, container, false)
+        _binding = FragmentRecipeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recipesRv = view.findViewById(R.id.rv_recipes)
-        showRecyclerList()
+//        showRecyclerList()
+
+        val factory: IngredientViewModelFactory = IngredientViewModelFactory.getInstance()
+        val viewModel: RecipeViewModel = ViewModelProvider(this,factory)[RecipeViewModel::class.java]
+
+        viewModel.getRecipes().observe(requireActivity()) { result ->
+            if (result != null) {
+                when (result) {
+                    is Result.Loading -> {
+                        binding.loading.visibility = View.VISIBLE
+                    }
+                    is Result.Success -> {
+                        binding.loading.visibility = View.GONE
+                        val data = result.data
+
+                        binding.rvRecipes.layoutManager = LinearLayoutManager(requireActivity())
+                        val listIngredientsAdapter = ListRecipesAdapter(data)
+                        binding.rvRecipes.adapter = listIngredientsAdapter
+
+//                        binding.rvIngredients.setLayoutManager(
+//                            LinearLayoutManager(
+//                                requireContext()
+//                            )
+//                        )
+//                        val listIngredientsAdapter = RecipeAdapter(data)
+//                        binding.rvIngredients.adapter = listIngredientsAdapter
+                    }
+                    is Result.Error -> {
+                        binding.loading.visibility = View.GONE
+                        Toast.makeText(
+                            requireActivity(),
+                            "error" + result.error,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            }
+        }
+
     }
 
-    private fun showRecyclerList() {
-        recipesRv.layoutManager = LinearLayoutManager(context)
-        val dummyData = DummyData()
-        val listRecipesAdapter = ListRecipesAdapter(dummyData.getDummyRecipesData())
-        recipesRv.adapter = listRecipesAdapter
-    }
+//    private fun showRecyclerList() {
+//        recipesRv.layoutManager = LinearLayoutManager(context)
+//        val dummyData = DummyData()
+//        val listRecipesAdapter = ListRecipesAdapter(dummyData.getDummyRecipesData())
+//        recipesRv.adapter = listRecipesAdapter
+//    }
 
     companion object {
         // TODO: Rename and change types and number of parameters

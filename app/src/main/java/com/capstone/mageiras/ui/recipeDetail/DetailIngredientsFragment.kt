@@ -11,18 +11,20 @@ import com.capstone.mageiras.R
 import com.capstone.mageiras.data.dummy.DummyData
 import com.capstone.mageiras.databinding.FragmentDetailIngredientsBinding
 import com.capstone.mageiras.adapter.ListIngredientsAdapter
+import com.capstone.mageiras.data.remote.response.IngredientsItem
+import com.capstone.mageiras.data.remote.response.RecipesItem
 
 private const val LIST_INGREDIENTS = "listIngredients"
 
 class DetailIngredientsFragment : Fragment() {
-    private var listIngredients: ArrayList<DummyData.Ingredients>? = null
+    private var listIngredients: ArrayList<IngredientsItem>? = null
 
     private var _binding: FragmentDetailIngredientsBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        listIngredients = arguments?.getParcelableArrayList<DummyData.Ingredients>(LIST_INGREDIENTS)
+        listIngredients = arguments?.getParcelableArrayList<IngredientsItem>(LIST_INGREDIENTS)
     }
 
     override fun onCreateView(
@@ -51,7 +53,7 @@ class DetailIngredientsFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(listIngredients: ArrayList<DummyData.Ingredients>) =
+        fun newInstance(listIngredients: ArrayList<IngredientsItem>) =
             DetailIngredientsFragment().apply {
                 arguments = Bundle().apply {
                     putParcelableArrayList(LIST_INGREDIENTS, listIngredients)

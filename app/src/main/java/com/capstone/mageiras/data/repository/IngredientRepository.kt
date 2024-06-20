@@ -8,6 +8,7 @@ import com.capstone.mageiras.data.remote.getIdToken
 import com.capstone.mageiras.data.remote.response.AddIngredientResponse
 import com.capstone.mageiras.data.remote.response.ErrorPredictResponse
 import com.capstone.mageiras.data.remote.response.IngredientsItem
+import com.capstone.mageiras.data.remote.response.RecipesItem
 import com.capstone.mageiras.data.remote.retrofit.ApiService
 import com.google.gson.Gson
 import okhttp3.MultipartBody
@@ -55,6 +56,21 @@ class IngredientRepository private constructor(
             Log.d("Token-getingredients", getIdToken())
             val response = apiService.getIngredients("Bearer ${getIdToken()}")
             emit(Result.Success(response.ingredients))
+        } catch (e: HttpException) {
+            val jsonInString = e.response()?.errorBody()?.string()
+            emit(Result.Error(jsonInString!!))
+            println(e.message)
+        } catch (e: Exception) {
+            println(e.message) // Print the exception to the log
+            emit(Result.Error("Error when caching API"))
+        }
+    }
+
+    fun getRecommendRecipes(): LiveData<Result<ArrayList<RecipesItem>>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getRecommendRecipe("Bearer ${getIdToken()}")
+            emit(Result.Success(response.recipes as ArrayList<RecipesItem>))
         } catch (e: HttpException) {
             val jsonInString = e.response()?.errorBody()?.string()
             emit(Result.Error(jsonInString!!))

@@ -1,6 +1,8 @@
 package com.capstone.mageiras.data.remote.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class IngredientResponse(
 
@@ -13,7 +15,7 @@ data class IngredientResponse(
 	@field:SerializedName("message")
 	val message: String
 )
-
+@Parcelize
 data class IngredientsItem(
 
 	@field:SerializedName("amount")
@@ -28,4 +30,4 @@ data class IngredientsItem(
 	@field:SerializedName("id")
 	val id: String? = null
 
-)
+) : Parcelable

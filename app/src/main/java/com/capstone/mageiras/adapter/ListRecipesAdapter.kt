@@ -11,10 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.capstone.mageiras.R
 import com.capstone.mageiras.data.dummy.DummyData
+import com.capstone.mageiras.data.remote.response.RecipesItem
 import com.capstone.mageiras.databinding.RecipesCardBinding
 import com.capstone.mageiras.ui.recipeDetail.RecipeDetailActivity
 
-class ListRecipesAdapter(private val listRecipes: ArrayList<DummyData.Recipes>) : RecyclerView.Adapter<ListRecipesAdapter.ListViewHolder>(){
+class ListRecipesAdapter(private val listRecipes: ArrayList<RecipesItem>) : RecyclerView.Adapter<ListRecipesAdapter.ListViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.recipes_card, parent, false)
@@ -29,7 +30,7 @@ class ListRecipesAdapter(private val listRecipes: ArrayList<DummyData.Recipes>) 
         holder.tvName.text = recipes.title
 //        holder.tvCookingTime.text = recipes.cookingTime
         Glide.with(holder.itemView.context)
-            .load(recipes.picture)
+            .load(recipes.imageUrl)
             .into(holder.imgPhoto)
 
         holder.itemView.setOnClickListener {
@@ -43,6 +44,5 @@ class ListRecipesAdapter(private val listRecipes: ArrayList<DummyData.Recipes>) 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imgPhoto: ImageView = itemView.findViewById(R.id.iv_recipes_picture)
         val tvName: TextView = itemView.findViewById(R.id.tv_recipes_name)
-//        val tvCookingTime: TextView = itemView.findViewById(R.id.tv_recipes_cooking_time)
     }
 }

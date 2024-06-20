@@ -19,6 +19,10 @@ import com.capstone.mageiras.ui.welcome.WelcomeActivity
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.capstone.mageiras.data.Result
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -34,7 +38,7 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val factory: AuthViewModelFactory = AuthViewModelFactory.getInstance(this)
+        val factory: AuthViewModelFactory = AuthViewModelFactory.getInstance()
         val viewModel: RegisterViewModel = ViewModelProvider(this,factory)[RegisterViewModel::class.java]
 
         // Check for confirm password is the same as password
@@ -56,19 +60,59 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         binding.buttonRegister.setOnClickListener {
-            viewModel.createAccount(binding.edRegisterEmail.text.toString(),binding.edRegisterPassword.text.toString()).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val intent = Intent(this, WelcomeActivity::class.java)
-                    intent.flags =
-                        Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
-                } else {
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        baseContext,
-                        "Authentication failed.",
-                        Toast.LENGTH_SHORT,
-                    ).show()
+//            viewModel.createAccount(binding.edRegisterEmail.text.toString(),binding.edRegisterPassword.text.toString()).addOnCompleteListener { task ->
+//                if (task.isSuccessful) {
+//                    val intent = Intent(this, WelcomeActivity::class.java)
+//                    intent.flags =
+//                        Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+//                    startActivity(intent)
+//                } else {
+//                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
+//                    Toast.makeText(
+//                        baseContext,
+//                        "Authentication failed.",
+//                        Toast.LENGTH_SHORT,
+//                    ).show()
+//                }
+//            }
+            if (binding.edRegisterUsername.text.toString().isEmpty()) {
+                binding.edRegisterUsername.error = "Username is required"
+                return@setOnClickListener
+            }
+            if (binding.edRegisterEmail.text.toString().isEmpty()) {
+                binding.edRegisterEmail.error = "Email is required"
+                return@setOnClickListener
+            }
+            if (binding.edRegisterPassword.text.toString().isEmpty()) {
+                binding.edRegisterPassword.error = "Password is required"
+                return@setOnClickListener
+            }
+
+            val email = binding.edRegisterEmail.text.toString()
+            val password = binding.edRegisterPassword.text.toString()
+            val username = binding.edRegisterUsername.text.toString()
+
+            val emailBody = RequestBody.create("text/plain".toMediaTypeOrNull(), email)
+            val passwordBody = RequestBody.create("text/plain".toMediaTypeOrNull(), password)
+            val usernameBody = RequestBody.create("text/plain".toMediaTypeOrNull(), username)
+            viewModel.register(emailBody,passwordBody,usernameBody).observe(this) {
+                when(it){
+                    is Result.Success -> {
+                        val intent = Intent(this, MainActivity::class.java)
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                        startActivity(intent)
+                    }
+                    is Result.Error -> {
+                        Toast.makeText(
+                            baseContext,
+                            "Authentication failed.",
+                            Toast.LENGTH_SHORT,
+                        ).show()
+                    }
+                    is Result.Loading -> {
+                        Log.d(TAG, "Loading")
+                    }
                 }
             }
         }

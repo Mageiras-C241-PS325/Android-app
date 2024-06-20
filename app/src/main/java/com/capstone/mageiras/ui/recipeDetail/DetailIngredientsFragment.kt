@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.mageiras.R
 import com.capstone.mageiras.data.dummy.DummyData
 import com.capstone.mageiras.databinding.FragmentDetailIngredientsBinding
-import com.capstone.mageiras.ui.adapter.ListIngredientsAdapter
+import com.capstone.mageiras.adapter.ListIngredientsAdapter
 
 private const val LIST_INGREDIENTS = "listIngredients"
 

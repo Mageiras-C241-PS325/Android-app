@@ -1,4 +1,4 @@
-package com.capstone.mageiras.ui.adapter
+package com.capstone.mageiras.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -15,13 +15,13 @@ class ListStepsAdapter(private val listSteps: ArrayList<String>) :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ListStepsAdapter.ListViewHolder {
+    ): ListViewHolder {
         val view: View = LayoutInflater.from(parent.context)
             .inflate(R.layout.recipe_detail_steps_item_row, parent, false)
         return ListViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ListStepsAdapter.ListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val steps = listSteps[position]
 
         holder.stepsNumber.text = (position + 1).toString()

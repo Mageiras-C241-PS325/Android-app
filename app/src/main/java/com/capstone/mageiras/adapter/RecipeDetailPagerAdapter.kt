@@ -1,4 +1,4 @@
-package com.capstone.mageiras.ui.adapter
+package com.capstone.mageiras.adapter
 
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity

@@ -1,16 +1,18 @@
 package com.capstone.mageiras.ui.result
 
 import android.content.Context
-import android.graphics.Bitmap
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
-import com.capstone.mageiras.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.mageiras.databinding.ActivityResultBinding
 import com.capstone.mageiras.ui.PredictViewModelFactory
 import com.capstone.mageiras.ui.camerax.CameraXActivity
@@ -21,7 +23,19 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import com.capstone.mageiras.data.Result
+import com.capstone.mageiras.data.dummy.DummyData
 import com.capstone.mageiras.databinding.DialogBottomSheetBinding
+import com.capstone.mageiras.adapter.ListIngredientsAdapter
+import com.capstone.mageiras.adapter.RecipeAdapter
+import com.capstone.mageiras.data.remote.response.IngredientsItem
+import com.capstone.mageiras.ui.main.MainActivity
+import com.capstone.mageiras.ui.success.SuccessActivity
+import com.google.gson.Gson
+import com.google.gson.JsonObject
+import com.google.gson.JsonPrimitive
+import kotlinx.serialization.json.Json
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 
 class ResultActivity : AppCompatActivity() {
 
@@ -29,6 +43,7 @@ class ResultActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultBinding
     private lateinit var viewModel: ResultViewModel
     private lateinit var file: File
+    private var output: List<String> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,37 +67,33 @@ class ResultActivity : AppCompatActivity() {
             if (intent.hasExtra(CameraXActivity.FROM_CAMERA)) {
                 file = File(localCurrentImageUri.path.toString())
             }else{
-                val imagePath = getPathFromUri(this, localCurrentImageUri) // Anda perlu mengimplementasikan fungsi ini
+                val imagePath = getPathFromUri(this, localCurrentImageUri)
                 file = File(imagePath)
             }
 
             val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
             val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
 
+
             viewModel.predictImage(body).observe(this@ResultActivity) { result ->
                 when (result) {
                     is Result.Loading -> {
                         showToast("Loading...")
                     }
-
                     is Result.Success -> {
-                        val response = result.data
-                        showToast(response.toString())
+                        output = result.data
+                        showToast(output.toString())
+                        showBottomSheetDialog()
                     }
-
                     is Result.Error -> {
                         showToast(result.error)
                     }
-
-                    else -> {}
                 }
             }
-            showBottomSheetDialog()
         }
-
     }
 
-    fun getPathFromUri(context: Context, uri: Uri): String {
+    private fun getPathFromUri(context: Context, uri: Uri): String {
         val cursor = context.contentResolver.query(uri, null, null, null, null)
         cursor?.moveToFirst()
         val path = cursor?.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA))
@@ -99,12 +110,9 @@ class ResultActivity : AppCompatActivity() {
 
         val binding = DialogBottomSheetBinding.inflate(layoutInflater)
 
-
-        // Dapatkan tinggi layar
         val displayMetrics = resources.displayMetrics
         val screenHeight = displayMetrics.heightPixels
 
-        // Atur tinggi BottomSheetDialog menjadi sama dengan tinggi layar
         val layoutParams = CoordinatorLayout.LayoutParams(
             CoordinatorLayout.LayoutParams.MATCH_PARENT,
             screenHeight
@@ -113,11 +121,47 @@ class ResultActivity : AppCompatActivity() {
 
         bottomSheetDialog.setContentView(binding.root)
 
-        // Dapatkan BottomSheetBehavior dan atur isFitToContents menjadi false dan setExpandedOffset menjadi 0
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.root.parent as View)
         bottomSheetBehavior.isFitToContents = false
         bottomSheetBehavior.setExpandedOffset(0)
 
         bottomSheetDialog.show()
+
+//        val ingredientsItem = IngredientsItem()
+        val what = output.groupingBy { it }.eachCount()
+        val list = what.map { (name, amount) ->
+            IngredientsItem(amount, null, name, null)
+        }
+
+        binding.rvScanResult.layoutManager = LinearLayoutManager(this)
+        val listIngredientsAdapter = RecipeAdapter(list)
+        binding.rvScanResult.adapter = listIngredientsAdapter
+
+        binding.buttonAddScan.setOnClickListener {
+
+            val gson = Gson()
+            val json = gson.toJson(list)
+
+            val ingredient = RequestBody.create("text/plain".toMediaTypeOrNull(), json)
+
+            Log.d("resultttt", json.toString())
+
+            viewModel.addManyIngredients(ingredient).observe(this@ResultActivity) { result ->
+                when (result) {
+                    is Result.Loading -> {
+                        showToast("Loading...")
+                    }
+                    is Result.Success -> {
+                        val intent = Intent(this, SuccessActivity::class.java)
+                        startActivity(intent)
+                    }
+                    is Result.Error -> {
+                        showToast(result.error)
+                    }
+                }
+            }
+        }
     }
 }
+
+data class Ingredient(val name: String, val amount: Int)

@@ -6,60 +6,52 @@
     android:layout_width="280dp"
     android:layout_height="175dp"
     android:layout_gravity="center"
-    android:layout_marginStart="20dp"
     android:layout_marginTop="4dp"
-    android:layout_marginBottom="4dp"
+    android:layout_marginStart="30dp"
     card_view:cardCornerRadius="16dp"
     android:layout_weight="2">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="175dp">
-
-        <ImageView
-            android:id="@+id/iv_recipes_picture"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/recipes_card_picture"
-            android:scaleType="centerCrop"
-            card_view:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_recipes_picture"
+                android:layout_width="match_parent"
+                android:layout_height="175dp"
+                android:contentDescription="@string/recipes_card_picture"
+                android:scaleType="centerCrop"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="175dp"
+                android:background="@drawable/gradient"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_recipes_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:scrollHorizontally="true"
+                android:text="@string/recipes_name"
+                android:layout_marginStart="10dp"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginStart="20dp"
-                android:layout_marginBottom="10dp"
-                card_view:layout_constraintBottom_toTopOf="@+id/tv_recipes_cooking_time"
-                card_view:layout_constraintStart_toStartOf="parent"
-                tools:text="@string/recipes_name" />
-
-            <TextView
-                android:id="@+id/tv_recipes_cooking_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:layout_marginStart="20dp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:scrollHorizontally="true"
+                android:textColor="@color/white"
+                android:fontFamily="@font/poppins_semi_bold"
                 card_view:layout_constraintBottom_toBottomOf="parent"
-                card_view:layout_constraintStart_toStartOf="parent"
-                tools:text="@string/cooking_time" />
+                card_view:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </FrameLayout>
 </androidx.cardview.widget.CardView>

@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.capstone.mageiras.R
 import com.capstone.mageiras.data.dummy.DummyData
 import com.capstone.mageiras.databinding.ActivityRecipeDetailBinding
-import com.capstone.mageiras.ui.adapter.RecipeDetailPagerAdapter
+import com.capstone.mageiras.adapter.RecipeDetailPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 

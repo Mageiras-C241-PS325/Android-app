@@ -24,6 +24,13 @@ android {
             "BASE_ML_URL",
             "\"http://35.226.149.200/\""
         )
+
+
+        buildConfigField(
+            "String",
+            "BASE_URL",
+            "\"http://34.50.65.229:80/\""
+        )
     }
 
     buildTypes {
@@ -59,6 +66,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //lotte
+    implementation(libs.lottie)
 
     // circle image
     implementation(libs.circleImageView)
@@ -99,4 +109,6 @@ dependencies {
     implementation("com.google.android.material:material:1.3.0-alpha03")
 
     implementation(libs.androidx.viewpager2)
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
 }

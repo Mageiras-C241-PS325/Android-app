@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.mageiras.R
 import com.capstone.mageiras.data.dummy.DummyData
-import com.capstone.mageiras.ui.adapter.ListRecipesAdapter
+import com.capstone.mageiras.adapter.ListRecipesAdapter
 import com.google.android.material.bottomappbar.BottomAppBar
 
 class RecipeFragment : Fragment() {

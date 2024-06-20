@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.recipeDetail.RecipeDetailActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_cancel"
@@ -17,74 +21,164 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imvCircularWithStroke"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/SpecificCornerRounded"
-        tools:src="@tools:sample/avatars" />
+        <ImageView
+            android:id="@+id/imvCircularWithStroke"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_food"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_recipe_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tabLayoutStartGuideline"
-        app:layout_constraintEnd_toStartOf="@+id/tv_recipe_genre"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imvCircularWithStroke"
-        tools:text="@string/recipes_name" />
+        <TextView
+            android:id="@+id/tvRecipeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:text="Gado Gado"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imvCircularWithStroke" />
 
-    <TextView
-        android:id="@+id/tv_recipe_genre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/tabLayoutStartGuideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_recipe_name"
-        app:layout_constraintTop_toBottomOf="@+id/imvCircularWithStroke"
-        tools:text="@string/genre" />
+        <TextView
+            android:id="@+id/tvRecipeGenre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This Healthy Gado gado is..."
+            android:layout_marginStart="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvRecipeName" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/tabLayoutStartGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="247dp" />
+        <ImageView
+            android:id="@+id/iv_carbs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/ic_carbs"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvRecipeGenre" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/recipeDetailTabs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginVertical="5dp"
-        android:background="@drawable/recipe_detail_tab_background"
-        android:minWidth="300dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabLayoutStartGuideline"
 
-        app:tabIndicatorHeight="0dp"
-        app:tabMode="fixed"
-        app:tabRippleColor="@null" />
+        <TextView
+            android:id="@+id/tv_carbs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="65g carbs"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_carbs"
+            app:layout_constraintStart_toEndOf="@+id/iv_carbs"
+            app:layout_constraintTop_toTopOf="@+id/iv_carbs" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recipeDetailTabs"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="86dp" />
+        <ImageView
+            android:id="@+id/iv_kcal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_kcal"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_carbs" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_kcal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="65g carbs"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_kcal"
+            app:layout_constraintStart_toEndOf="@+id/iv_kcal"
+            app:layout_constraintTop_toTopOf="@+id/iv_kcal" />
+
+        <ImageView
+            android:id="@+id/iv_protein"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_protein"
+            android:layout_marginTop="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_carbs"
+            app:layout_constraintTop_toBottomOf="@+id/tvRecipeGenre" />
+
+        <TextView
+            android:id="@+id/tv_protein"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="65g carbs"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_protein"
+            app:layout_constraintStart_toEndOf="@+id/iv_protein"
+            app:layout_constraintTop_toTopOf="@+id/iv_protein" />
+
+        <ImageView
+            android:id="@+id/iv_fat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_protein"
+            android:layout_marginTop="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_kcal"
+            app:layout_constraintTop_toBottomOf="@+id/iv_protein" />
+
+        <TextView
+            android:id="@+id/tv_fat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="65g carbs"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_fat"
+            app:layout_constraintStart_toEndOf="@+id/iv_fat"
+            app:layout_constraintTop_toTopOf="@+id/iv_fat" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tabLayoutStartGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="247dp" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/recipeDetailTabs"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/recipe_detail_tab_background"
+            android:minWidth="300dp"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_fat"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="fixed"
+            app:tabRippleColor="@null"
+            style="?attr/tabStyle"
+            app:tabTextColor="@color/md_theme_inverseSurface"
+            app:tabSelectedTextColor="@color/white"/>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="20dp"
+            android:clipToPadding="false"
+            app:layout_constraintTop_toBottomOf="@id/recipeDetailTabs"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.mageiras.R
 import com.capstone.mageiras.databinding.FragmentDetailStepsBinding
-import com.capstone.mageiras.ui.adapter.ListStepsAdapter
+import com.capstone.mageiras.adapter.ListStepsAdapter
 
 private const val LIST_STEPS = "listSteps"
 

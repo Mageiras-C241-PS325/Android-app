@@ -1,4 +1,4 @@
-package com.capstone.mageiras.ui.adapter
+package com.capstone.mageiras.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -17,7 +17,7 @@ import com.capstone.mageiras.ui.recipeDetail.RecipeDetailActivity
 class ListRecipesAdapter(private val listRecipes: ArrayList<DummyData.Recipes>) : RecyclerView.Adapter<ListRecipesAdapter.ListViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.recipes_fragment_item_row, parent, false)
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.recipes_card, parent, false)
         return ListViewHolder(view)
     }
 

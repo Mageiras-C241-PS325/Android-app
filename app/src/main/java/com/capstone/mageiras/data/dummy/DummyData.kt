@@ -45,52 +45,17 @@ class DummyData {
         Ingredients(
             "Bawang Putih",
             "2 siung",
-            "https://umsu.ac.id/health/wp-content/uploads/2023/12/khasiat-luar-biasa-bawang-putih-untuk-kesehatan.jpg"
-        ),
-        Ingredients(
-            "Bawang Putih",
-            "2 siung",
-            "https://umsu.ac.id/health/wp-content/uploads/2023/12/khasiat-luar-biasa-bawang-putih-untuk-kesehatan.jpg"
-        ),
-        Ingredients(
-            "Bawang Putih",
-            "2 siung",
-            "https://umsu.ac.id/health/wp-content/uploads/2023/12/khasiat-luar-biasa-bawang-putih-untuk-kesehatan.jpg"
-        ),
-        Ingredients(
-            "Bawang Putih",
-            "2 siung",
-            "https://umsu.ac.id/health/wp-content/uploads/2023/12/khasiat-luar-biasa-bawang-putih-untuk-kesehatan.jpg"
-        ),
-        Ingredients(
-            "Bawang Putih",
-            "2 siung",
-            "https://umsu.ac.id/health/wp-content/uploads/2023/12/khasiat-luar-biasa-bawang-putih-untuk-kesehatan.jpg"
-        ),
-        Ingredients(
-            "Bawang Putih",
-            "2 siung",
-            "https://umsu.ac.id/health/wp-content/uploads/2023/12/khasiat-luar-biasa-bawang-putih-untuk-kesehatan.jpg"
-        ),
-        Ingredients(
-            "Bawang Putih",
-            "2 siung",
-            "https://umsu.ac.id/health/wp-content/uploads/2023/12/khasiat-luar-biasa-bawang-putih-untuk-kesehatan.jpg"
-        ),
-        Ingredients(
-            "Bawang Putih",
-            "2 siung",
-            "https://umsu.ac.id/health/wp-content/uploads/2023/12/khasiat-luar-biasa-bawang-putih-untuk-kesehatan.jpg"
-        ),
-        Ingredients(
-            "Bawang Merah",
-            "2 siung",
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQud7gu-Nlkv1XiOHBPXLN2QXKRk3Xdow0Hg&s"
         ),
         Ingredients(
             "Kunyit",
             "1 ruas",
             "https://umsu.ac.id/artikel/wp-content/uploads/2023/07/Kunyit-650x375.jpg"
+        ),
+        Ingredients(
+            "Bawang Merah",
+            "2 siung",
+            "https://umsu.ac.id/health/wp-content/uploads/2023/12/khasiat-luar-biasa-bawang-putih-untuk-kesehatan.jpg"
         ),
         Ingredients(
             "Kemiri",
@@ -100,4 +65,56 @@ class DummyData {
     )
 
     fun getDummyIngredientsData() = dummyIngredients
+
+
+    val dummyScanIngredients: ArrayList<Ingredients> = arrayListOf(
+        Ingredients(
+            "Bawang Putih",
+            "2 siung",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQud7gu-Nlkv1XiOHBPXLN2QXKRk3Xdow0Hg&s"
+        ),
+        Ingredients(
+            "Bawang Merah",
+            "2 siung",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQud7gu-Nlkv1XiOHBPXLN2QXKRk3Xdow0Hg&s"
+        ),
+        Ingredients(
+            "Bawang Merah",
+            "2 siung",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQud7gu-Nlkv1XiOHBPXLN2QXKRk3Xdow0Hg&s"
+        ),
+        Ingredients(
+            "Bawang Merah",
+            "2 siung",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQud7gu-Nlkv1XiOHBPXLN2QXKRk3Xdow0Hg&s"
+        ),
+        Ingredients(
+            "Bawang Merah",
+            "2 siung",
+            "https://umsu.ac.id/health/wp-content/uploads/2023/12/khasiat-luar-biasa-bawang-putih-untuk-kesehatan.jpg"
+        ),
+        Ingredients(
+            "Bawang Merah",
+            "2 siung",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQud7gu-Nlkv1XiOHBPXLN2QXKRk3Xdow0Hg&s"
+        ),
+        Ingredients(
+            "Bawang Merah",
+            "2 siung",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQud7gu-Nlkv1XiOHBPXLN2QXKRk3Xdow0Hg&s"
+        ),
+        Ingredients(
+            "Bawang Merah",
+            "2 siung",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQud7gu-Nlkv1XiOHBPXLN2QXKRk3Xdow0Hg&s"
+        ),
+        Ingredients(
+            "Bawang Merah",
+            "2 siung",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQud7gu-Nlkv1XiOHBPXLN2QXKRk3Xdow0Hg&s"
+        )
+
+    )
+
+    fun getDummyScanIngredientsData() = dummyScanIngredients
 }

@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:text="@string/ingredient_name"
-                android:textStyle="bold"
+                android:fontFamily="@font/poppins_semi_bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/iv_ingredients_picture"
                 app:layout_constraintTop_toTopOf="parent" />

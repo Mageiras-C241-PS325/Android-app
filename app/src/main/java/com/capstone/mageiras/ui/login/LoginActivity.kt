@@ -15,6 +15,9 @@ import com.capstone.mageiras.ui.register.RegisterActivity
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
+import com.capstone.mageiras.data.Result
 
 class LoginActivity : AppCompatActivity() {
 
@@ -31,22 +34,31 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         super.onCreate(savedInstanceState)
 
-        val factory: AuthViewModelFactory = AuthViewModelFactory.getInstance(this)
+        val factory: AuthViewModelFactory = AuthViewModelFactory.getInstance()
         val viewModel: LoginViewModel = ViewModelProvider(this,factory)[LoginViewModel::class.java]
 
-
         binding.buttonLogin.setOnClickListener {
-            viewModel.signIn(
-                binding.edLoginEmail.text.toString(),
-                binding.edLoginPassword.text.toString()).addOnCompleteListener(this) { task ->
+
+            if (binding.edLoginEmail.text!!.isEmpty()  || binding.edLoginPassword.text!!.isEmpty()) {
+                Toast.makeText(
+                    baseContext,
+                    "Please fill all the fields",
+                    Toast.LENGTH_SHORT,
+                ).show()
+                return@setOnClickListener
+            }
+
+
+            val email = binding.edLoginEmail.text.toString()
+            val password = binding.edLoginPassword.text.toString()
+
+            viewModel.signIn(email, password).addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
                     Log.d(ContentValues.TAG, "signInWithEmail:success")
                     val intent = Intent(this, MainActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
                 } else {
-                    // If sign in fails, display a message to the user.
                     Log.w(ContentValues.TAG, "signInWithEmail:failure", task.exception)
                     Toast.makeText(
                         baseContext,
@@ -55,6 +67,29 @@ class LoginActivity : AppCompatActivity() {
                     ).show()
                 }
             }
+
+            val emailBody = RequestBody.create("text/plain".toMediaTypeOrNull(), email)
+            val passwordBody = RequestBody.create("text/plain".toMediaTypeOrNull(), password)
+
+//            viewModel.login(emailBody, passwordBody).observe(this) {
+//                when (it) {
+//                    is Result.Loading -> {
+//                        Log.d(TAG, "Loading")
+//                    }
+//
+//                    is Result.Success -> {
+//                        Log.d(TAG, "Success")
+//                        val intent = Intent(this, MainActivity::class.java)
+//                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+//                        startActivity(intent)
+//                        val token = it.data.idToken
+//                    }
+//
+//                    is Result.Error -> {
+//                        Log.d(TAG, "Error")
+//                    }
+//                }
+//            }
         }
 
         binding.toRegister.setOnClickListener {

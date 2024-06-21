@@ -30,7 +30,7 @@ The Mageiras mobile app is built using the following technologies:
 
 1. Clone the project repository from GitHub:
 ```
-git clone [https://github.com/Mageiras-C241-PS325/Android-app.gi]
+git clone https://github.com/Mageiras-C241-PS325/Android-app.git
 ```
 2. Open the project in Android Studio.
 
